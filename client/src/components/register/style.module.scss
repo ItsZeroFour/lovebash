@@ -1,0 +1,100 @@
+.register {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.register__wrapper {
+  min-height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register__main__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 430px;
+  padding: 30px;
+
+  border: 2px solid #9e96ae;
+  border-radius: 5px;
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 40px;
+
+    input {
+      padding: 15px;
+      border-radius: 3px;
+      width: 100%;
+
+      @media (max-width: 460px) {
+        &::placeholder {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .register__error {
+    width: 100%;
+  }
+
+  p {
+    color: red;
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: right;
+  }
+
+  button {
+    margin-top: 30px;
+    width: 100%;
+    background: var(--color-blue);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: var(--color-white);
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  @media (max-width: 460px) {
+    width: 100%;
+  }
+}
+
+.register__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  gap: 10px;
+
+  p {
+    color: #74747a;
+    font-family: sans-serif;
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--color-blue);
+    font-size: 14px;
+    font-family: "Kalnia-sb", sans-serif;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+}
