@@ -32,7 +32,7 @@ const Main = () => {
             </aside>
           </div>
 
-          <Link to="/">Начни свой путь в мире Bash уже сегодня {">"}</Link>
+          <Link to="/modules">Начни свой путь в мире Bash уже сегодня {">"}</Link>
 
           <ul className={style.main__list}>
             <li className={`${style.main__list} ${style.main__item__1}`}>
