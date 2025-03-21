@@ -1,0 +1,208 @@
+.main {
+  padding-top: 80px;
+  padding-bottom: 100px;
+  background: linear-gradient(
+    49deg,
+    rgba(225, 245, 255, 1) 31%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.main__wrapper {
+  h2 {
+    text-align: center;
+    font-size: 54px;
+
+    @media (max-width: 720px) {
+      font-size: 36px;
+    }
+
+    @media (max-width: 425px) {
+      font-size: 28px;
+    }
+  }
+
+  & > a {
+    display: block;
+    margin-top: 40px;
+    color: var(--color-blue);
+    font-size: 30px;
+    font-family: "Kalnia-sb", sans-serif;
+    font-weight: 600;
+    text-align: center;
+
+    @media (max-width: 390px) {
+      font-size: 20px;
+    }
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.main__text {
+  margin-top: 50px;
+
+  display: flex;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  aside {
+    width: 50%;
+
+    p {
+      font-size: 20px;
+
+      @media (max-width: 750px) {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 750px) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 750px) {
+    flex-direction: column;
+  }
+}
+
+.main__list {
+  margin-top: 40px;
+
+  @media (max-width: 1120px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.main__item {
+  filter: drop-shadow(0px 0px 20px var(--color-blue));
+  z-index: 3; /* Родительский элемент с более высоким z-index */
+  position: relative; /* Чтобы у него был свой контекст наложения */
+
+  p {
+    font-size: 16px;
+  }
+}
+
+.main__item__top {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 10px;
+  padding-bottom: 10px;
+
+  .main__item__round {
+    width: 15px;
+    height: 15px;
+    background: var(--color-blue);
+    border-radius: 50%;
+  }
+
+  .main__item__squere {
+    width: 40px;
+    height: 15px;
+    background: var(--color-blue);
+  }
+}
+
+.main__item__con {
+  width: 360px;
+  height: 240px;
+  background: #2b2b2b;
+  position: relative; /* Для создания контекста наложения для ::before */
+  padding: 20px;
+  color: var(--color-white);
+  clip-path: polygon(0 0, 90% 0, 100% 20%, 100% 100%, 0 100%);
+  z-index: 2; /* Родительский элемент имеет z-index выше, чем псевдоэлемент */
+  transform-style: preserve-3d;
+
+  @media (max-width: 390px) {
+    width: 310px;
+    height: 200px;
+  }
+}
+
+.main__item__con::before {
+  content: "";
+  position: absolute; /* Позиционирование внутри родителя */
+  top: 0;
+  left: 0;
+  width: 370px;
+  height: 250px;
+  background: var(--color-blue);
+  clip-path: polygon(0 0, 90% 0, 100% 20%, 100% 100%, 0 100%);
+  z-index: -2; /* Псевдоэлемент должен быть позади родителя */
+  transform: translateX(-1px);
+
+  @media (max-width: 390px) {
+    width: 320px;
+    height: 210px;
+  }
+}
+
+.main__item__con::after {
+  content: "";
+  position: absolute; /* Позиционирование внутри родителя */
+  top: 2%;
+  left: 1.8%;
+  width: 350px;
+  height: 230px;
+  background: var(--color-dark);
+  clip-path: polygon(0 0, 90% 0, 100% 20%, 100% 100%, 0 100%);
+  z-index: -1; /* Псевдоэлемент должен быть позади родителя */
+  transform: translateX(-1px);
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.5);
+
+  @media (max-width: 390px) {
+    width: 300px;
+    height: 190px;
+  }
+}
+
+.main__item__2 {
+  filter: drop-shadow(0px 0px 20px var(--color-orange));
+
+  .main__item__con::before {
+    background: var(--color-orange);
+  }
+
+  .main__item__top {
+    .main__item__round {
+      background: var(--color-orange);
+    }
+
+    .main__item__squere {
+      background: var(--color-orange);
+    }
+  }
+}
+
+.main__item__3 {
+  filter: drop-shadow(0px 0px 20px var(--color-green));
+
+  .main__item__con::before {
+    background: var(--color-green);
+  }
+
+  .main__item__top {
+    .main__item__round {
+      background: var(--color-green);
+    }
+
+    .main__item__squere {
+      background: var(--color-green);
+    }
+  }
+}
+
+/*
+LoveBash Admin Panel is a user-friendly interface for managing the LoveBash platform. It allows administrators to oversee user accounts, monitor activity, and manage content efficiently. Built with React and SCSS, it features responsive design for seamless use on any device. Enhance user experience with powerful management tools.
+*/
