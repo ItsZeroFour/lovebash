@@ -84,7 +84,7 @@ h4,
 h5,
 h6 {
   font-family: "Kalnia-sb", sans-serif;
-  color: var(--сolor-dark-blue);
+  color: var(--color-dark-blue);
 }
 
 ul,
@@ -100,4 +100,14 @@ textarea {
 
 footer {
   margin-top: auto;
+}
+
+.user_container {
+  display: flex;
+}
+
+.user_nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

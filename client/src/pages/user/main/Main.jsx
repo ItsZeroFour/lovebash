@@ -1,11 +1,17 @@
 import React from "react";
 import MainPage from "../../../components/user/main/MainPage";
+import LeftPanel from "../../../components/left_panel/LeftPanel";
+import UserTop from "../../../components/user_top/UserTop";
 
-const Main = () => {
+const Main = ({ setOpenMenu, openMenu }) => {
   return (
-    <React.Fragment>
-      <MainPage />
-    </React.Fragment>
+    <section className="user_container">
+      <LeftPanel setOpenMenu={setOpenMenu} openMenu={openMenu} />
+      <div className="user_nav">
+        <UserTop setOpenMenu={setOpenMenu} openMenu={openMenu} />
+        <MainPage />
+      </div>
+    </section>
   );
 };
 
