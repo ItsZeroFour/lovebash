@@ -63,6 +63,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
     },
   ];
 
+  /* 🙀 Функции для отображения списка задачь в позиции напротив модуля */ 
   const handleMouseEnterModule = (event, moduleId) => {
     if (!hoveredModule) {
       const rect = event.target.getBoundingClientRect();
@@ -77,11 +78,11 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
   const handleMouseLeaveModule = () => {
     setTimeout(() => {
       setHoveredModule(null);
-    }, 200); // Задержка перед скрытием списка
+    }, 200);
   };
 
   const handleMouseEnterTasks = () => {
-    setHoveredModule((prev) => prev); // Оставляем список видимым
+    setHoveredModule((prev) => prev);
   };
 
   return (
@@ -103,6 +104,9 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                   <li
                     key={item._id}
                     onClick={() => setOpenMenu(false)}
+                    /*
+                      📟 Добавляем выподающий список только если у нас стоит категория "Модули"
+                    */ 
                     onMouseEnter={() =>
                       item.name === "Модули" && setShowModules(true)
                     }
@@ -116,6 +120,10 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                     }
                   >
                     <Link to={item.url}>{item.name}</Link>
+                    {/* 
+                      👾 Отображаем все модули из массива, а так же их задания из каждого модуля,
+                      на который попал курсор пользователя
+                    */}
                     {item.name === "Модули" && showModules && (
                       <ul className={style.left_panel__modules}>
                         {modules.map((module) => (
@@ -159,6 +167,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
           </div>
         </aside>
       ) : (
+        /* 🙊 Версия для мобильных устройств */ 
         openMenu && (
           <aside className={style.left_panel}>
             <div className={style.left_panel__wrapper}>

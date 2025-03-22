@@ -88,7 +88,7 @@ const ModulesMain = () => {
                     <ol>
                       {item.tasks.map((item) => (
                         <li key={item.id}>
-                          <Link to="/">
+                          <Link to={`/user/task/${item.id}`}>
                             <h4>{item.name}</h4>
                           </Link>
                         </li>
