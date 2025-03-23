@@ -10,6 +10,9 @@ const RegisterMain = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
+  /*
+    🧐 Валидация ввода E-main
+  */
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
@@ -18,6 +21,10 @@ const RegisterMain = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    /*
+      ⚙️ Выводим конкретные сообщения под каждый тип
+      ошибки заполнения
+    */
     const errors = {
       login: "Введите имя пользователя",
       email: "Введите корректный email",
@@ -26,6 +33,9 @@ const RegisterMain = () => {
       mismatchPassword: "Пароли не совпадают",
     };
 
+    /*
+      😶‍🌫️ Валидируем ошибки
+    */
     if (!login.trim()) return setError(errors.login);
     if (!email.trim() || !validateEmail(email)) return setError(errors.email);
     if (!password.trim()) return setError(errors.password);

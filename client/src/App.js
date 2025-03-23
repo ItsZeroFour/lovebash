@@ -10,17 +10,27 @@ import { useState, useEffect } from "react";
 import UserModules from "./pages/user/modules/UserModules";
 import UserModule from "./pages/user/module/UserModule";
 import Task from "./pages/user/task/Task";
+import CompletingTask from "./pages/user/completing_task_1/CompletingTask";
+import CompletingTask2 from "./pages/user/completing_task_2/CompletingTask2";
+import Terminal from "./pages/user/terminal/Terminal";
+import Settings from "./pages/user/settings/Settings";
 
 function App() {
   const [openMenu, setOpenMenu] = useState(false);
 
   const location = useLocation();
-  /* 🍵 Hide header and footer if user stay on this paths ⬇️ */ 
+  /* 🍵 Hide header and footer if user stay on this paths ⬇️ */
   const hiddenRoutes = [
     "/user/main",
     "/user/modules",
+    "/user/terminal",
+    "/user/settings",
+
+    // ⬇️ URL's with dynamic params ⬇️
     /^\/user\/module\/.*/,
     /^\/user\/task\/.*/,
+    /^\/user\/task\/complete\/.*/,
+    /^\/user\/task\/complete-2\/.*/,
   ];
 
   useEffect(() => {
@@ -59,6 +69,20 @@ function App() {
               }
             />
             <Route
+              path="/user/terminal"
+              element={
+                <Terminal setOpenMenu={setOpenMenu} openMenu={openMenu} />
+              }
+            />
+            <Route
+              path="/user/settings"
+              element={
+                <Settings setOpenMenu={setOpenMenu} openMenu={openMenu} />
+              }
+            />
+            
+            {/* 🔗 :id - для получения конкретного модуля/задания */}
+            <Route
               path="/user/module/:id"
               element={
                 <UserModule setOpenMenu={setOpenMenu} openMenu={openMenu} />
@@ -67,6 +91,21 @@ function App() {
             <Route
               path="/user/task/:id"
               element={<Task setOpenMenu={setOpenMenu} openMenu={openMenu} />}
+            />
+            <Route
+              path="/user/task/complete/:id"
+              element={
+                <CompletingTask setOpenMenu={setOpenMenu} openMenu={openMenu} />
+              }
+            />
+            <Route
+              path="/user/task/complete-2/:id"
+              element={
+                <CompletingTask2
+                  setOpenMenu={setOpenMenu}
+                  openMenu={openMenu}
+                />
+              }
             />
           </Routes>
         </main>

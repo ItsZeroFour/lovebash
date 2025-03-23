@@ -73,7 +73,9 @@ const TaskMain = () => {
               Для перенаправления на страницу используйте функцию navigate
               Пример использования: navigate("/some")
             */}
-            <button>Начать задание</button>
+            <button onClick={() => navigate("/user/task/complete/123")}>
+              Начать задание
+            </button>
           </div>
         </div>
       </div>

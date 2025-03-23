@@ -63,7 +63,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
     },
   ];
 
-  /* 🙀 Функции для отображения списка задачь в позиции напротив модуля */ 
+  /* 🙀 Функции для отображения списка задачь в позиции напротив модуля */
   const handleMouseEnterModule = (event, moduleId) => {
     if (!hoveredModule) {
       const rect = event.target.getBoundingClientRect();
@@ -106,7 +106,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                     onClick={() => setOpenMenu(false)}
                     /*
                       📟 Добавляем выподающий список только если у нас стоит категория "Модули"
-                    */ 
+                    */
                     onMouseEnter={() =>
                       item.name === "Модули" && setShowModules(true)
                     }
@@ -134,7 +134,9 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                             }
                             onMouseLeave={handleMouseLeaveModule}
                           >
-                            {module.title}
+                            <Link to={`/user/module/${module._id}`}>
+                              {module.title}
+                            </Link>
                             {hoveredModule === module._id && (
                               <ul
                                 className={style.left_panel__modules__items}
@@ -149,7 +151,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                                   .find((m) => m._id === hoveredModule)
                                   ?.tasks.map((task) => (
                                     <li key={task._id}>
-                                      <Link to={`/task/${task._id}`}>
+                                      <Link to={`/user/task/${task._id}`}>
                                         {task.title}
                                       </Link>
                                     </li>
@@ -167,7 +169,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
           </div>
         </aside>
       ) : (
-        /* 🙊 Версия для мобильных устройств */ 
+        /* 🙊 Версия для мобильных устройств */
         openMenu && (
           <aside className={style.left_panel}>
             <div className={style.left_panel__wrapper}>

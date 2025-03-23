@@ -11,6 +11,9 @@ const Signin = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    /*
+      😧 Валидация полей
+    */ 
     const errors = {
       login: "Введите имя пользователя или email",
       password: "Введите пароль",
