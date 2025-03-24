@@ -80,7 +80,7 @@ function App() {
                 <Settings setOpenMenu={setOpenMenu} openMenu={openMenu} />
               }
             />
-            
+
             {/* 🔗 :id - для получения конкретного модуля/задания */}
             <Route
               path="/user/module/:id"
