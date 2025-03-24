@@ -4,6 +4,7 @@ import UserTop from "./components/user_top/UserTop";
 
 import { Routes, Route } from "react-router-dom";
 import Main from "./pages/main/Main";
+import Users from "./pages/users/Users";
 
 function App() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -19,6 +20,7 @@ function App() {
 
             <Routes>
               <Route path="/" element={<Main />} />
+              <Route path="/users" element={<Users />} />
             </Routes>
           </div>
         </div>

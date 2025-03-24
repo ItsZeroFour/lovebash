@@ -1,0 +1,52 @@
+.users {
+  margin-top: 60px;
+  margin-bottom: 90px;
+}
+
+.users__wrapper {
+  overflow: hidden;
+
+  @media (max-width: 920px) {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 30px;
+
+    tr {
+      position: relative;
+      background: var(--color-white);
+      border-bottom-right-radius: 10px;
+
+      cursor: pointer;
+
+      &:first-child {
+        background: var(--color-dark-blue);
+        margin-bottom: 30px;
+
+        th {
+          padding-top: 20px;
+          padding-bottom: 20px;
+          color: var(--color-white);
+          font-weight: 600;
+        }
+      }
+
+      td {
+        padding-left: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+
+        button {
+          background: none;
+        }
+      }
+    }
+
+    @media (max-width: 920px) {
+      min-width: 1020px;
+    }
+  }
+}
