@@ -4,6 +4,7 @@ import user1 from "../../../assets/icons/settings/user.svg";
 import password from "../../../assets/icons/settings/password.svg";
 import removeAccount from "../../../assets/icons/settings/remove.svg";
 import remove2 from "../../../assets/icons/settings/remove-2.svg";
+import { useNavigate } from "react-router-dom";
 
 const SettingsMain = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,6 +18,8 @@ const SettingsMain = () => {
   const [errors, setErrors] = useState({});
   const [infoErrors, setInfoErrors] = useState({});
   const [securityErrors, setSecurityErrors] = useState({});
+
+  const navigate = useNavigate();
 
   /* ✈️ Валидация полей */
   const validateInfo = () => {
@@ -59,6 +62,7 @@ const SettingsMain = () => {
 
   const handleSubmitSecurity = (e) => {
     e.preventDefault();
+
     if (validateSecurity()) {
       // Здесь можно добавить логику для сохранения данных
       console.log("Данные успешно сохранены", formData);
@@ -86,7 +90,12 @@ const SettingsMain = () => {
               </p>
               <div className={style.settings__modal__buttons}>
                 <button onClick={() => setOpenModal(false)}>Отмена</button>
-                <button onClick={() => setOpenModal(false)}>
+                <button
+                  onClick={() => {
+                    setOpenModal(false);
+                    navigate("/");
+                  }}
+                >
                   Удалить аккаунт
                 </button>
               </div>
@@ -201,7 +210,7 @@ const SettingsMain = () => {
                     )}
                   </div>
                   <div className={style.settings__form__buttons}>
-                    <button onClick={() => setOpenModal(true)}>
+                    <button type="button" onClick={() => setOpenModal(true)}>
                       <img src={removeAccount} alt="remove" /> Удалить аккаунт
                     </button>
                     <div className={style.settings__form__buttons__con}>

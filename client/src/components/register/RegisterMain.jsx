@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import style from "./style.module.scss";
 import logo2 from "../../assets/logo_2.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import paper from "../../assets/icons/user_main/list.svg";
 
 const RegisterMain = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,10 @@ const RegisterMain = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const navigate = useNavigate();
 
   /*
     🧐 Валидация ввода E-main
@@ -31,23 +36,64 @@ const RegisterMain = () => {
       password: "Введите пароль",
       shortPassword: "Пароль должен содержать минимум 6 символов",
       mismatchPassword: "Пароли не совпадают",
+      spaceInPassword: "Пароль не должен содержать пробелы",
     };
 
     /*
       😶‍🌫️ Валидируем ошибки
     */
-    if (!login.trim()) return setError(errors.login);
-    if (!email.trim() || !validateEmail(email)) return setError(errors.email);
-    if (!password.trim()) return setError(errors.password);
-    if (password.length < 6) return setError(errors.shortPassword);
-    if (password !== confirmPassword) return setError(errors.mismatchPassword);
+    const trimmedLogin = login.trim();
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+    const trimmedConfirmPassword = confirmPassword.trim();
+
+    if (!trimmedLogin) return setError(errors.login);
+    if (!trimmedEmail || !validateEmail(trimmedEmail))
+      return setError(errors.email);
+    if (!trimmedPassword) return setError(errors.password);
+    if (trimmedPassword.includes(" ")) return setError(errors.spaceInPassword);
+    if (trimmedPassword.length < 6) return setError(errors.shortPassword);
+    if (trimmedPassword !== trimmedConfirmPassword)
+      return setError(errors.mismatchPassword);
 
     setError("");
-    console.log("Отправка данных", { login, email, password });
+    console.log("Отправка данных", {
+      login: trimmedLogin,
+      email: trimmedEmail,
+      password: trimmedPassword,
+    });
+
+    navigate("/user/main");
   };
 
   return (
     <section className={style.register}>
+      {openModal && (
+        <div className={style.register__modal}>
+          <div className={style.register__modal__container}>
+            <div className={style.register__modal__top}>
+              <img src={paper} alt="paper" />
+              <h4>Ошибка</h4>
+            </div>
+
+            <p>Пользователь с указанным email уже зарегистрирован в системе</p>
+
+            <div className={style.register__modal__buttons}>
+              <button
+                onClick={() => {
+                  setOpenModal(false);
+                  navigate(-1);
+                }}
+              >
+                Отмена
+              </button>
+              <button onClick={() => setOpenModal(false)}>
+                Попробовать еще раз
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="container">
         <div className={style.register__wrapper}>
           <div className={style.register__main__form}>
@@ -57,7 +103,7 @@ const RegisterMain = () => {
               <input
                 type="text"
                 placeholder="Имя пользователя"
-                onChange={(event) => setLogin(event.target.value)}
+                onChange={(event) => setLogin(event.target.value.trim())}
                 value={login}
                 style={{
                   border: error ? "1px solid red" : "1px solid #68686B",
@@ -67,7 +113,7 @@ const RegisterMain = () => {
               <input
                 type="text"
                 placeholder="Адрес электронной почты"
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value.trim())}
                 value={email}
                 style={{
                   border: error ? "1px solid red" : "1px solid #68686B",
@@ -77,7 +123,7 @@ const RegisterMain = () => {
               <input
                 type="password"
                 placeholder="Пароль"
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) => setPassword(event.target.value.trim())}
                 value={password}
                 style={{
                   border: error ? "1px solid red" : "1px solid #68686B",
@@ -87,7 +133,9 @@ const RegisterMain = () => {
               <input
                 type="password"
                 placeholder="Подтвердите пароль"
-                onChange={(event) => setConfirmPassword(event.target.value)}
+                onChange={(event) =>
+                  setConfirmPassword(event.target.value.trim())
+                }
                 value={confirmPassword}
                 style={{
                   border: error ? "1px solid red" : "1px solid #68686B",

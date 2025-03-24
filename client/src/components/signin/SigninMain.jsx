@@ -1,31 +1,43 @@
 import React, { useState } from "react";
 import style from "./style.module.scss";
 import logo2 from "../../assets/logo_2.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     /*
       😧 Валидация полей
-    */ 
+    */
     const errors = {
       login: "Введите имя пользователя или email",
       password: "Введите пароль",
       shortPassword: "Пароль должен содержать минимум 6 символов",
+      spaceInPassword: "Пароль не должен содержать пробелы",
     };
 
-    if (!login.trim()) return setError(errors.login);
-    if (!password.trim()) return setError(errors.password);
-    if (password.length < 6) return setError(errors.shortPassword);
+    const trimmedLogin = login.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedLogin) return setError(errors.login);
+    if (!trimmedPassword) return setError(errors.password);
+    if (trimmedPassword.includes(" ")) return setError(errors.spaceInPassword);
+    if (trimmedPassword.length < 6) return setError(errors.shortPassword);
 
     setError("");
-    console.log("Отправка данных", { login, password });
+    console.log("Отправка данных", {
+      login: trimmedLogin,
+      password: trimmedPassword,
+    });
+
+    navigate("/user/main");
   };
 
   return (

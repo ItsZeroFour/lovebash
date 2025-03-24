@@ -105,7 +105,7 @@ const UserModulesMain = () => {
                     </span>
                   </div>
 
-                  <Link to="/">
+                  <Link to={`/user/module/${item._id}`}>
                     <img src={polygon} alt="polygon" />
                   </Link>
                 </div>

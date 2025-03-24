@@ -7,7 +7,23 @@ import paper from "../../../assets/icons/completing_task/paper.svg";
 
 const CompletingTaskMain = () => {
   const [openModalFailed, setOpenModalFailed] = useState(false);
+  const [answers, setAnswers] = useState(Array(5).fill("")); // Стейт для списка ответов
   const navigate = useNavigate();
+
+  const handleInputChange = (index, value) => {
+    const trimmedValue = value.trim(); // Удаление пробелов в начале и в конце
+    const newAnswers = [...answers];
+    newAnswers[index] = trimmedValue;
+    setAnswers(newAnswers);
+  };
+
+  const handleFinish = () => {
+    if (answers.some((answer) => answer === "")) {
+      alert("Пожалуйста, заполните все поля ответа."); // Уведомление о незаполненных полях
+    } else {
+      setOpenModalFailed(true);
+    }
+  };
 
   return (
     <aside className={style.completing_task}>
@@ -40,7 +56,7 @@ const CompletingTaskMain = () => {
                 >
                   Вернуться к заданиям
                 </button>
-                <button onClick={() => setOpenModalFailed(false)}>
+                <button onClick={() => window.location.reload()}>
                   Попробовать еще раз
                 </button>
               </div>
@@ -112,34 +128,23 @@ const CompletingTaskMain = () => {
             </div>
 
             <ol>
-              <li>
-                <input type="text" placeholder="Введите ответ" />
-              </li>
-
-              <li>
-                <input type="text" placeholder="Введите ответ" />
-              </li>
-
-              <li>
-                <input type="text" placeholder="Введите ответ" />
-              </li>
-
-              <li>
-                <input type="text" placeholder="Введите ответ" />
-              </li>
-
-              <li>
-                <input type="text" placeholder="Введите ответ" />
-              </li>
+              {answers.map((answer, index) => (
+                <li key={index}>
+                  <input
+                    type="text"
+                    placeholder="Введите ответ"
+                    value={answer}
+                    onChange={(e) => handleInputChange(index, e.target.value)}
+                  />
+                </li>
+              ))}
             </ol>
           </div>
 
           <div className={style.completing_task__bottom}>
             {/* 🎧 Кнопка возвращения на предыдущую страницу */}
             <button onClick={() => navigate(-1)}>Отмена</button>
-            <button onClick={() => setOpenModalFailed(true)}>
-              Завершить выполнение
-            </button>
+            <button onClick={handleFinish}>Завершить выполнение</button>
           </div>
         </div>
       </div>
