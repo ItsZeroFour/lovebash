@@ -16,7 +16,7 @@ const UserTop = ({ setOpenMenu, openMenu }) => {
             <Link to="/user/main">
               <div className={style.user_top__user__name}>
                 <p>Имя пользователя</p>
-                <p>Пользователь</p>
+                <p>Администратор</p>
               </div>
 
               <div className={style.user_top__user__avatar}>

@@ -17,10 +17,11 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
   const [openModuleTasksId, setOpenModuleTasksId] = useState(null);
 
   const menu = [
-    { name: "Главная", url: "/user/main", _id: uuidv4() },
-    { name: "Модули", url: "/user/modules", _id: uuidv4() },
-    { name: "Эмулятор Терминала", url: "/user/terminal", _id: uuidv4() },
-    { name: "Настройки", url: "/user/settings", _id: uuidv4() },
+    { name: "Главная", url: "/", _id: uuidv4() },
+    { name: "Пользователи", url: "/users", _id: uuidv4() },
+    { name: "Модули", url: "/modules", _id: uuidv4() },
+    { name: "Задания", url: "/tasks", _id: uuidv4() },
+    { name: "Хранилище файлов", url: "/file-storage", _id: uuidv4() },
   ];
 
   const modules = [
