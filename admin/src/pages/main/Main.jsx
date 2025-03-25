@@ -13,6 +13,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { Link } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -76,11 +77,13 @@ const Main = () => {
         <div className={style.user_main__wrapper}>
           <div className={style.user_main__stats}>
             <div className={style.user_main__stats__item}>
-              <div className={style.user_main__stats__item__icon}>
-                <img src={userPlus} alt="paper" />
-              </div>
-              <h3>XXXX</h3>
-              <p>пользователей системы</p>
+              <Link to="/users">
+                <div className={style.user_main__stats__item__icon}>
+                  <img src={userPlus} alt="paper" />
+                </div>
+                <h3>XXXX</h3>
+                <p>пользователей системы</p>
+              </Link>
             </div>
 
             <div className={style.user_main__stats__item}>
@@ -93,13 +96,15 @@ const Main = () => {
             </div>
 
             <div className={style.user_main__stats__item}>
-              <div className={style.user_main__stats__item__icon}>
-                {" "}
-                <img src={list} alt="list" />
-              </div>
+              <Link to="/modules">
+                <div className={style.user_main__stats__item__icon}>
+                  {" "}
+                  <img src={list} alt="list" />
+                </div>
 
-              <h3>XXXX</h3>
-              <p>модулей системы</p>
+                <h3>XXXX</h3>
+                <p>модулей системы</p>
+              </Link>
             </div>
           </div>
 

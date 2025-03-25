@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./style.module.scss";
 import deleteIcon from "../../assets/icons/users/delete.svg";
 import userPlus from "../../assets/icons/users/user-plusx.svg";
 import { useNavigate, useParams } from "react-router-dom";
+import paper from "../../assets/icons/user_main/user-check.svg";
 
 const Users = () => {
+  const [openModalSuccess, setOpenModalSuccess] = useState(false);
   /* 🫨 Тут мы получаем id из параметра в url */
   const { id } = useParams();
 
@@ -12,6 +14,39 @@ const Users = () => {
 
   return (
     <aside className={style.users}>
+      {openModalSuccess && (
+        <div className={style.users__modal}>
+          <div className={style.users__modal__container}>
+            <div className={style.users__modal__top}>
+              <img src={paper} alt="paper" />
+              <h4>Подтверждение удаления</h4>
+            </div>
+
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+              sequi ullam necessitatibus
+            </p>
+
+            <div className={style.users__modal__buttons}>
+              <button
+                onClick={() => {
+                  setOpenModalSuccess(false);
+                }}
+              >
+                Отмена
+              </button>
+              <button
+                onClick={() => {
+                  setOpenModalSuccess(false);
+                }}
+              >
+                Удалить
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="container__inner">
         <div className={style.users__wrapper}>
           <h1>Пользователи системы</h1>
@@ -35,7 +70,12 @@ const Users = () => {
               <td>гггг-мм-дд чч-мм-сс</td>
               <td>гггг-мм-дд</td>
               <td>
-                <button onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenModalSuccess(true);
+                  }}
+                >
                   <img src={deleteIcon} alt="delete" />
                 </button>
               </td>
@@ -50,7 +90,12 @@ const Users = () => {
               <td>73872837</td>
               <td>гггг-мм-дд</td>
               <td>
-                <button onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenModalSuccess(true);
+                  }}
+                >
                   <img src={deleteIcon} alt="delete" />
                 </button>
               </td>
@@ -65,7 +110,12 @@ const Users = () => {
               <td>гггг-мм-дд чч-мм-сс</td>
               <td>гггг-мм-дд</td>
               <td>
-                <button onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenModalSuccess(true);
+                  }}
+                >
                   <img src={deleteIcon} alt="delete" />
                 </button>
               </td>
@@ -80,7 +130,12 @@ const Users = () => {
               <td>гггг-мм-дд чч-мм-сс</td>
               <td>гггг-мм-дд</td>
               <td>
-                <button onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenModalSuccess(true);
+                  }}
+                >
                   <img src={deleteIcon} alt="delete" />
                 </button>
               </td>
