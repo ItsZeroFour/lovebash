@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import style from "./style.module.scss";
 import { Link } from "react-router-dom";
 import paper from "../../assets/icons/user_main/user-check.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const User = () => {
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
   const [openModuleTasks, setOpenModuleTasks] = useState(null);
+
+  /* 🫨 Тут мы получаем id из параметра в url */
+  const { id } = useParams();
 
   const username = "длинное имя пользователя13276432876432876243873246872346"; // Пример длинного имени пользователя
   const truncatedUsername =

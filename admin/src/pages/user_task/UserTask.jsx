@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 const UserTask = () => {
   /* 🫨 Тут мы получаем id из параметра в url */
   const { id } = useParams();
+  
   const navigate = useNavigate();
 
   return (

@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import style from "./style.module.scss";
 import deleteIcon from "../../assets/icons/users/delete.svg";
 import userPlus from "../../assets/icons/users/user-plusx.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import paper from "../../assets/icons/user_main/user-check.svg";
 
 const Users = () => {
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
-  /* 🫨 Тут мы получаем id из параметра в url */
-  const { id } = useParams();
 
   const navigate = useNavigate();
 

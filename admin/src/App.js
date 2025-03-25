@@ -7,6 +7,7 @@ import Main from "./pages/main/Main";
 import Users from "./pages/users/Users";
 import User from "./pages/user/User";
 import UserTask from "./pages/user_task/UserTask";
+import Modules from "./pages/modules/Modules";
 
 function App() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -25,6 +26,7 @@ function App() {
               <Route path="/users" element={<Users />} />
               <Route path="/user/:id" element={<User />} />
               <Route path="/user/task/:id" element={<UserTask />} />
+              <Route path="/modules" element={<Modules />} />
             </Routes>
           </div>
         </div>
