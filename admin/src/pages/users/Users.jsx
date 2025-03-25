@@ -2,9 +2,12 @@ import React from "react";
 import style from "./style.module.scss";
 import deleteIcon from "../../assets/icons/users/delete.svg";
 import userPlus from "../../assets/icons/users/user-plusx.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Users = () => {
+  /* 🫨 Тут мы получаем id из параметра в url */
+  const { id } = useParams();
+
   const navigate = useNavigate();
 
   return (
@@ -23,7 +26,7 @@ const Users = () => {
               <th></th>
             </tr>
 
-            <tr onClick={() => navigate("123")}>
+            <tr onClick={() => navigate("/user/123")}>
               <td>
                 <img src={userPlus} alt="user plus" />
               </td>
@@ -38,7 +41,7 @@ const Users = () => {
               </td>
             </tr>
 
-            <tr>
+            <tr onClick={() => navigate("/user/123")}>
               <td>
                 <img src={userPlus} alt="user plus" />
               </td>
@@ -53,7 +56,7 @@ const Users = () => {
               </td>
             </tr>
 
-            <tr>
+            <tr onClick={() => navigate("/user/123")}>
               <td>
                 <img src={userPlus} alt="user plus" />
               </td>
@@ -68,7 +71,7 @@ const Users = () => {
               </td>
             </tr>
 
-            <tr>
+            <tr onClick={() => navigate("/user/123")}>
               <td>
                 <img src={userPlus} alt="user plus" />
               </td>
