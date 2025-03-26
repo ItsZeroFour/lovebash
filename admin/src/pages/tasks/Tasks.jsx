@@ -5,32 +5,36 @@ import paper from "../../assets/icons/modules/list.svg";
 import paper2 from "../../assets/icons/user_main/list.svg";
 import { useNavigate, Link } from "react-router-dom";
 
-const Modules = () => {
+const Tasks = () => {
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
-  const [hoveredTitle, setHoveredTitle] = useState(null);
 
   const navigate = useNavigate();
 
-  const modulesData = [
+  const tasksData = [
     {
       id: 1,
-      title: "Очень длинное наименование модуля 1, которое нужно сократить",
+      title: "Наименование задания 1",
       date: "2023-01-01",
       status: "Доступен",
+      module: "отсутствует",
+      isValid: true,
       tasks: 5,
     },
+
     {
       id: 2,
-      title: "Наименование модуля 2",
-      date: "2023-02-01",
-      status: "Не доступен",
-      tasks: 3,
+      title: "Наименование задания 2",
+      date: "2023-01-01",
+      status: "Доступен",
+      module: "отсутствует",
+      isValid: true,
+      tasks: 5,
     },
   ];
 
-  const filteredModules = modulesData.filter((module) => {
+  const filteredTasks = tasksData.filter((module) => {
     const matchesSearch = module.title
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -42,11 +46,11 @@ const Modules = () => {
   });
 
   return (
-    <aside className={style.modules}>
+    <aside className={style.tasks}>
       {openModalSuccess && (
-        <div className={style.modules__modal}>
-          <div className={style.modules__modal__container}>
-            <div className={style.modules__modal__top}>
+        <div className={style.tasks__modal}>
+          <div className={style.tasks__modal__container}>
+            <div className={style.tasks__modal__top}>
               <img src={paper2} alt="paper" />
               <h4>Подтверждение удаления</h4>
             </div>
@@ -56,7 +60,7 @@ const Modules = () => {
               sequi ullam necessitatibus
             </p>
 
-            <div className={style.modules__modal__buttons}>
+            <div className={style.tasks__modal__buttons}>
               <button
                 onClick={() => {
                   setOpenModalSuccess(false);
@@ -77,13 +81,13 @@ const Modules = () => {
       )}
 
       <div className="container__inner">
-        <div className={style.modules__wrapper}>
-          <div className={style.modules__top}>
-            <h1>Модули</h1>
-            <Link to="/module/create">Создать новый модуль</Link>
+        <div className={style.tasks__wrapper}>
+          <div className={style.tasks__top}>
+            <h1>Задания</h1>
+            <Link to="/task/create">Создать новое задание</Link>
           </div>
 
-          <div className={style.modules__filter}>
+          <div className={style.tasks__filter}>
             <input
               type="text"
               placeholder="Поиск по названию..."
@@ -105,41 +109,29 @@ const Modules = () => {
             <tr>
               <th></th>
               <th>ID</th>
-              <th>Модуль</th>
+              <th>Задание</th>
               <th>Дата создания</th>
               <th>Статус</th>
-              <th>Кол-во заданий</th>
+              <th>Модуль</th>
+              <th>Валидность</th>
               <th></th>
             </tr>
-            {filteredModules.map((module) => (
+            {filteredTasks.map((task) => (
               <tr
-                key={module.id}
+                key={task.id}
                 onClick={() =>
-                  navigate(`/module/create`, { state: { id: module.id } })
+                  navigate(`/task/create`, { state: { id: task.id } })
                 }
               >
                 <td>
                   <img src={paper} alt="paper" />
                 </td>
-                <td>{module.id}</td>
-                <td
-                  onMouseEnter={() => setHoveredTitle(module.id)}
-                  onMouseLeave={() => setHoveredTitle(null)}
-                  className={style.module__title_wrapper}
-                >
-                  {module.title.length > 25
-                    ? module.title.substring(0, 25) + "..."
-                    : module.title}
-
-                  {hoveredTitle === module.id && (
-                    <div className={style.module__full_title}>
-                      {module.title}
-                    </div>
-                  )}
-                </td>
-                <td>{module.date}</td>
-                <td>{module.status}</td>
-                <td>{module.tasks}</td>
+                <td>{task.id}</td>
+                <td>{task.title}</td>
+                <td>{task.date}</td>
+                <td>{task.status}</td>
+                <td>{task.module}</td>
+                <td>{task.isValid ? "ture" : "false"}</td>
                 <td>
                   <button
                     onClick={(e) => {
@@ -159,4 +151,4 @@ const Modules = () => {
   );
 };
 
-export default Modules;
+export default Tasks;

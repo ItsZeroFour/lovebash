@@ -108,12 +108,12 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                     /*
                       📟 Добавляем выподающий список только если у нас стоит категория "Модули"
                     */
-                    onMouseEnter={() =>
-                      item.name === "Модули" && setShowModules(true)
-                    }
-                    onMouseLeave={() =>
-                      item.name === "Модули" && setShowModules(false)
-                    }
+                    // onMouseEnter={() =>
+                    //   item.name === "Модули" && setShowModules(true)
+                    // }
+                    // onMouseLeave={() =>
+                    //   item.name === "Модули" && setShowModules(false)
+                    // }
                     style={
                       location.pathname === item.url
                         ? { background: "#fff", color: "#000" }

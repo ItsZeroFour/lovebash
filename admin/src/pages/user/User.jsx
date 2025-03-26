@@ -22,7 +22,6 @@ const User = () => {
       id: 1,
       title: "Название модуля 1",
       status: "новый",
-      totalTasks: 5,
       completedTasks: 3,
       tasks: [
         {
@@ -46,7 +45,6 @@ const User = () => {
       id: 2,
       title: "Название модуля 2",
       status: "в процессе",
-      totalTasks: 4,
       completedTasks: 2,
       tasks: [
         {
@@ -173,7 +171,7 @@ const User = () => {
 
           <div className={style.user__tasks}>
             {modules.map((module) => (
-              <Link to={`/module/edit/${module.id}`}>
+              <Link to={`/module/create`} state={{ id: module.id }}>
                 <div key={module.id} className={style.user__tasks__main__info}>
                   <div className={style.user__tasks__top}>
                     <h2>{module.title}</h2>
@@ -187,7 +185,7 @@ const User = () => {
                         setOpenModuleTasks(module.id);
                       }}
                     >
-                      Количество заданий: {module.totalTasks}
+                      Количество заданий: {module.tasks.length}
                     </button>
                     <p>
                       Выполненное количество заданий: {module.completedTasks}

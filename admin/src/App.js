@@ -8,6 +8,10 @@ import Users from "./pages/users/Users";
 import User from "./pages/user/User";
 import UserTask from "./pages/user_task/UserTask";
 import Modules from "./pages/modules/Modules";
+import CreateModule from "./pages/create_module/CreateModule";
+import Tasks from "./pages/tasks/Tasks";
+import CreateTask from "./pages/create_task/CreateTask";
+import FileStorage from "./pages/file_storage/FileStorage";
 
 function App() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -27,6 +31,10 @@ function App() {
               <Route path="/user/:id" element={<User />} />
               <Route path="/user/task/:id" element={<UserTask />} />
               <Route path="/modules" element={<Modules />} />
+              <Route path="/module/create" element={<CreateModule />} />
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/task/create" element={<CreateTask />} />
+              <Route path="/file-storage" element={<FileStorage />} />
             </Routes>
           </div>
         </div>
