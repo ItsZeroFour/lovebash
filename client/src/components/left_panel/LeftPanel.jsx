@@ -103,71 +103,73 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                 {menu.map((item) => {
                   const isActive =
                     item.url === "/"
-                      ? location.pathname === "/"
-                      : location.pathname.startsWith(item.url);
+                      ? location.pathname === "/user"
+                      : location.pathname.startsWith(`${item.url}`);
 
-                  <li
-                    key={item._id}
-                    onClick={() => setOpenMenu(false)}
-                    /*
+                  return (
+                    <li
+                      key={item._id}
+                      onClick={() => setOpenMenu(false)}
+                      /*
                       📟 Добавляем выподающий список только если у нас стоит категория "Модули"
                     */
-                    onMouseEnter={() =>
-                      item.name === "Модули" && setShowModules(true)
-                    }
-                    onMouseLeave={() =>
-                      item.name === "Модули" && setShowModules(false)
-                    }
-                    style={
-                      isActive
-                        ? { background: "#fff", color: "#000" }
-                        : { background: "none" }
-                    }
-                  >
-                    <Link to={item.url}>{item.name}</Link>
-                    {/* 
+                      onMouseEnter={() =>
+                        item.name === "Модули" && setShowModules(true)
+                      }
+                      onMouseLeave={() =>
+                        item.name === "Модули" && setShowModules(false)
+                      }
+                      style={
+                        isActive
+                          ? { background: "#fff", color: "#000" }
+                          : { background: "none" }
+                      }
+                    >
+                      <Link to={item.url}>{item.name}</Link>
+                      {/* 
                       👾 Отображаем все модули из массива, а так же их задания из каждого модуля,
                       на который попал курсор пользователя
                     */}
-                    {item.name === "Модули" && showModules && (
-                      <ul className={style.left_panel__modules}>
-                        {modules.map((module) => (
-                          <li
-                            key={module._id}
-                            onMouseEnter={(e) =>
-                              handleMouseEnterModule(e, module._id)
-                            }
-                            onMouseLeave={handleMouseLeaveModule}
-                          >
-                            <Link to={`/user/module/${module._id}`}>
-                              {module.title}
-                            </Link>
-                            {hoveredModule === module._id && (
-                              <ul
-                                className={style.left_panel__modules__items}
-                                style={{
-                                  top: taskPosition.top - 200,
-                                  left: taskPosition.left,
-                                }}
-                                onMouseEnter={handleMouseEnterTasks}
-                                onMouseLeave={handleMouseLeaveModule}
-                              >
-                                {modules
-                                  .find((m) => m._id === hoveredModule)
-                                  ?.tasks.map((task) => (
-                                    <li key={task._id}>
-                                      <Link to={`/user/task/${task._id}`}>
-                                        {task.title}
-                                      </Link>
-                                    </li>
-                                  ))}
-                              </ul>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>;
+                      {item.name === "Модули" && showModules && (
+                        <ul className={style.left_panel__modules}>
+                          {modules.map((module) => (
+                            <li
+                              key={module._id}
+                              onMouseEnter={(e) =>
+                                handleMouseEnterModule(e, module._id)
+                              }
+                              onMouseLeave={handleMouseLeaveModule}
+                            >
+                              <Link to={`/user/module/${module._id}`}>
+                                {module.title}
+                              </Link>
+                              {hoveredModule === module._id && (
+                                <ul
+                                  className={style.left_panel__modules__items}
+                                  style={{
+                                    top: taskPosition.top - 200,
+                                    left: taskPosition.left,
+                                  }}
+                                  onMouseEnter={handleMouseEnterTasks}
+                                  onMouseLeave={handleMouseLeaveModule}
+                                >
+                                  {modules
+                                    .find((m) => m._id === hoveredModule)
+                                    ?.tasks.map((task) => (
+                                      <li key={task._id}>
+                                        <Link to={`/user/task/${task._id}`}>
+                                          {task.title}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                </ul>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  );
                 })}
               </ul>
             </div>
