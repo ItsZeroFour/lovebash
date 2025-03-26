@@ -9,6 +9,7 @@ const Tasks = () => {
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [hoveredTaskId, setHoveredTaskId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -84,7 +85,7 @@ const Tasks = () => {
         <div className={style.tasks__wrapper}>
           <div className={style.tasks__top}>
             <h1>Задания</h1>
-            <Link to="/task/create">Создать новое задание</Link>
+            <Link to="/tasks/create">Создать новое задание</Link>
           </div>
 
           <div className={style.tasks__filter}>
@@ -120,18 +121,30 @@ const Tasks = () => {
               <tr
                 key={task.id}
                 onClick={() =>
-                  navigate(`/task/create`, { state: { id: task.id } })
+                  navigate(`/tasks/create`, { state: { id: task.id } })
                 }
               >
                 <td>
                   <img src={paper} alt="paper" />
                 </td>
                 <td>{task.id}</td>
-                <td>{task.title}</td>
+                <td
+                  title={task.title}
+                  onMouseEnter={() => setHoveredTaskId(task.id)}
+                  onMouseLeave={() => setHoveredTaskId(null)}
+                >
+                  {task.title.length > 20
+                    ? task.title.substring(0, 20) + "..."
+                    : task.title}
+
+                  {hoveredTaskId === task.id && (
+                    <div className={style.task__full_title}>{task.title}</div>
+                  )}
+                </td>
                 <td>{task.date}</td>
                 <td>{task.status}</td>
                 <td>{task.module}</td>
-                <td>{task.isValid ? "ture" : "false"}</td>
+                <td>{task.isValid ? "true" : "false"}</td>
                 <td>
                   <button
                     onClick={(e) => {

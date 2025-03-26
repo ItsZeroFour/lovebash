@@ -105,6 +105,14 @@
         button {
           background: none;
         }
+
+        .task__full_title {
+          position: absolute;
+          background: #cacaca;
+          padding: 10px;
+
+          top: 0;
+        }
       }
     }
 

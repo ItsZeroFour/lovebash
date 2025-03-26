@@ -9,14 +9,16 @@ const FileStorage = () => {
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("");
+  const [hoveredTitle, setHoveredTitle] = useState(null);
+  const [hoveredUrl, setHoveredUrl] = useState(null);
 
   const navigate = useNavigate();
 
   const filesData = [
     {
       id: 1,
-      title: "Название файла 1",
-      url: "месторасположение",
+      title: "Название файла 1 123123312123132",
+      url: "месторасположениеeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
       type: "Тип 2",
     },
     {
@@ -62,7 +64,6 @@ const FileStorage = () => {
               <button
                 onClick={() => {
                   setOpenModalSuccess(false);
-                  window.location.reload();
                 }}
               >
                 Удалить
@@ -113,15 +114,39 @@ const FileStorage = () => {
               <tr
                 key={file.id}
                 onClick={() =>
-                  navigate(`/module/create`, { state: { id: file.id } })
+                  navigate(`/modules/create`, { state: { id: file.id } })
                 }
               >
                 <td>
                   <img src={paper} alt="paper" />
                 </td>
                 <td>{file.id}</td>
-                <td>{file.title}</td>
-                <td>{file.url}</td>
+                <td
+                  onMouseEnter={() => setHoveredTitle(file.id)}
+                  onMouseLeave={() => setHoveredTitle(null)}
+                  className={style.module__title_wrapper}
+                >
+                  {file.title.length > 20
+                    ? file.title.substring(0, 20) + "..."
+                    : file.title}
+
+                  {hoveredTitle === file.id && (
+                    <div className={style.file__full_title}>{file.title}</div>
+                  )}
+                </td>
+                <td
+                  onMouseEnter={() => setHoveredUrl(file.id)}
+                  onMouseLeave={() => setHoveredUrl(null)}
+                  className={style.module__title_wrapper}
+                >
+                  {file.url.length > 20
+                    ? file.url.substring(0, 20) + "..."
+                    : file.url}
+
+                  {hoveredUrl === file.id && (
+                    <div className={style.file__full_title}>{file.url}</div>
+                  )}
+                </td>
                 <td>{file.type}</td>
                 <td>
                   <button

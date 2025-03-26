@@ -80,7 +80,7 @@ const Modules = () => {
         <div className={style.modules__wrapper}>
           <div className={style.modules__top}>
             <h1>Модули</h1>
-            <Link to="/module/create">Создать новый модуль</Link>
+            <Link to="/modules/create">Создать новый модуль</Link>
           </div>
 
           <div className={style.modules__filter}>
@@ -115,7 +115,7 @@ const Modules = () => {
               <tr
                 key={module.id}
                 onClick={() =>
-                  navigate(`/module/create`, { state: { id: module.id } })
+                  navigate(`/modules/create`, { state: { id: module.id } })
                 }
               >
                 <td>

@@ -171,7 +171,7 @@ const User = () => {
 
           <div className={style.user__tasks}>
             {modules.map((module) => (
-              <Link to={`/module/create`} state={{ id: module.id }}>
+              <Link to={`/modules/create`} state={{ id: module.id }}>
                 <div key={module.id} className={style.user__tasks__main__info}>
                   <div className={style.user__tasks__top}>
                     <h2>{module.title}</h2>
@@ -199,7 +199,7 @@ const User = () => {
                     <ol>
                       {module.tasks.map((task) => (
                         <li key={task.id}>
-                          <Link to={`/user/task/${task.id}`}>
+                          <Link to={`/users/tasks/${task.id}`}>
                             <p>{task.title}</p>
                             <p
                               style={

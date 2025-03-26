@@ -59,7 +59,7 @@ const Users = () => {
               <th></th>
             </tr>
 
-            <tr onClick={() => navigate("/user/123")}>
+            <tr onClick={() => navigate("/users/123")}>
               <td>
                 <img src={userPlus} alt="user plus" />
               </td>
@@ -79,7 +79,7 @@ const Users = () => {
               </td>
             </tr>
 
-            <tr onClick={() => navigate("/user/123")}>
+            <tr onClick={() => navigate("/users/123")}>
               <td>
                 <img src={userPlus} alt="user plus" />
               </td>
@@ -99,7 +99,7 @@ const Users = () => {
               </td>
             </tr>
 
-            <tr onClick={() => navigate("/user/123")}>
+            <tr onClick={() => navigate("/users/123")}>
               <td>
                 <img src={userPlus} alt="user plus" />
               </td>
@@ -119,7 +119,7 @@ const Users = () => {
               </td>
             </tr>
 
-            <tr onClick={() => navigate("/user/123")}>
+            <tr onClick={() => navigate("/users/123")}>
               <td>
                 <img src={userPlus} alt="user plus" />
               </td>

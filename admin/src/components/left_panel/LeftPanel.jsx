@@ -4,6 +4,7 @@ import logo from "../../assets/logo.svg";
 import exit from "../../assets/icons/left_panel/exit.svg";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useLocation } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 
 const LeftPanel = ({ setOpenMenu, openMenu }) => {
   const location = useLocation();
@@ -101,70 +102,77 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
             <div className={style.left_panel__menu}>
               <h4>Меню</h4>
               <ul>
-                {menu.map((item) => (
-                  <li
-                    key={item._id}
-                    onClick={() => setOpenMenu(false)}
-                    /*
+                {menu.map((item) => {
+                  const isActive =
+                    item.url === "/"
+                      ? location.pathname === "/"
+                      : location.pathname.startsWith(item.url);
+
+                  return (
+                    <li
+                      key={item._id}
+                      onClick={() => setOpenMenu(false)}
+                      /*
                       📟 Добавляем выподающий список только если у нас стоит категория "Модули"
                     */
-                    // onMouseEnter={() =>
-                    //   item.name === "Модули" && setShowModules(true)
-                    // }
-                    // onMouseLeave={() =>
-                    //   item.name === "Модули" && setShowModules(false)
-                    // }
-                    style={
-                      location.pathname === item.url
-                        ? { background: "#fff", color: "#000" }
-                        : { background: "none" }
-                    }
-                  >
-                    <Link to={item.url}>{item.name}</Link>
-                    {/* 
+                      // onMouseEnter={() =>
+                      //   item.name === "Модули" && setShowModules(true)
+                      // }
+                      // onMouseLeave={() =>
+                      //   item.name === "Модули" && setShowModules(false)
+                      // }
+                      style={
+                        isActive
+                          ? { background: "#fff", color: "#000" }
+                          : { background: "none" }
+                      }
+                    >
+                      <Link to={item.url}>{item.name}</Link>
+                      {/* 
                       👾 Отображаем все модули из массива, а так же их задания из каждого модуля,
                       на который попал курсор пользователя
                     */}
-                    {item.name === "Модули" && showModules && (
-                      <ul className={style.left_panel__modules}>
-                        {modules.map((module) => (
-                          <li
-                            key={module._id}
-                            onMouseEnter={(e) =>
-                              handleMouseEnterModule(e, module._id)
-                            }
-                            onMouseLeave={handleMouseLeaveModule}
-                          >
-                            <Link to={`/user/module/${module._id}`}>
-                              {module.title}
-                            </Link>
-                            {hoveredModule === module._id && (
-                              <ul
-                                className={style.left_panel__modules__items}
-                                style={{
-                                  top: taskPosition.top - 200,
-                                  left: taskPosition.left,
-                                }}
-                                onMouseEnter={handleMouseEnterTasks}
-                                onMouseLeave={handleMouseLeaveModule}
-                              >
-                                {modules
-                                  .find((m) => m._id === hoveredModule)
-                                  ?.tasks.map((task) => (
-                                    <li key={task._id}>
-                                      <Link to={`/user/task/${task._id}`}>
-                                        {task.title}
-                                      </Link>
-                                    </li>
-                                  ))}
-                              </ul>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
+                      {item.name === "Модули" && showModules && (
+                        <ul className={style.left_panel__modules}>
+                          {modules.map((module) => (
+                            <li
+                              key={module._id}
+                              onMouseEnter={(e) =>
+                                handleMouseEnterModule(e, module._id)
+                              }
+                              onMouseLeave={handleMouseLeaveModule}
+                            >
+                              <Link to={`/user/module/${module._id}`}>
+                                {module.title}
+                              </Link>
+                              {hoveredModule === module._id && (
+                                <ul
+                                  className={style.left_panel__modules__items}
+                                  style={{
+                                    top: taskPosition.top - 200,
+                                    left: taskPosition.left,
+                                  }}
+                                  onMouseEnter={handleMouseEnterTasks}
+                                  onMouseLeave={handleMouseLeaveModule}
+                                >
+                                  {modules
+                                    .find((m) => m._id === hoveredModule)
+                                    ?.tasks.map((task) => (
+                                      <li key={task._id}>
+                                        <Link to={`/user/task/${task._id}`}>
+                                          {task.title}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                </ul>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

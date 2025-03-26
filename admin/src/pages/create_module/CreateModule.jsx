@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./style.module.scss";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
 import arrowUp from "../../assets/icons/create_module/arrow-up.svg";
 import arrowDown from "../../assets/icons/create_module/arrow-down.svg";
@@ -263,10 +263,16 @@ const CreateModule = () => {
                   <ol>
                     {selectedTasks.map((item, index) => (
                       <li key={item}>
-                        <p>
-                          {index + 1}. {item}
-                        </p>
-                        <p>Не пройдено</p>
+                        <Link
+                          to="/tasks/create"
+                          /* Тут скорее всего надо будет отредактировать передачу id */
+                          state={{ id: item.id || index }}
+                        >
+                          <p>
+                            {index + 1}. {item}
+                          </p>
+                          <p>Не пройдено</p>
+                        </Link>
                       </li>
                     ))}
                   </ol>

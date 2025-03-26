@@ -100,7 +100,12 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
             <div className={style.left_panel__menu}>
               <h4>Меню</h4>
               <ul>
-                {menu.map((item) => (
+                {menu.map((item) => {
+                  const isActive =
+                    item.url === "/"
+                      ? location.pathname === "/"
+                      : location.pathname.startsWith(item.url);
+
                   <li
                     key={item._id}
                     onClick={() => setOpenMenu(false)}
@@ -114,7 +119,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                       item.name === "Модули" && setShowModules(false)
                     }
                     style={
-                      location.pathname === item.url
+                      isActive
                         ? { background: "#fff", color: "#000" }
                         : { background: "none" }
                     }
@@ -162,8 +167,8 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                         ))}
                       </ul>
                     )}
-                  </li>
-                ))}
+                  </li>;
+                })}
               </ul>
             </div>
           </div>

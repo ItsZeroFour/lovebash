@@ -28,12 +28,12 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/users" element={<Users />} />
-              <Route path="/user/:id" element={<User />} />
-              <Route path="/user/task/:id" element={<UserTask />} />
+              <Route path="/users/:id" element={<User />} />
+              <Route path="/users/task/:id" element={<UserTask />} />
               <Route path="/modules" element={<Modules />} />
-              <Route path="/module/create" element={<CreateModule />} />
+              <Route path="/modules/create" element={<CreateModule />} />
               <Route path="/tasks" element={<Tasks />} />
-              <Route path="/task/create" element={<CreateTask />} />
+              <Route path="/tasks/create" element={<CreateTask />} />
               <Route path="/file-storage" element={<FileStorage />} />
             </Routes>
           </div>
