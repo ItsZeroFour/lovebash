@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import style from "./style.module.scss";
 import logo2 from "../../assets/logo_2.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 const Signin = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -60,17 +62,30 @@ const Signin = () => {
                 }
               />
 
-              <input
-                type="password"
-                placeholder="Пароль"
-                onChange={(event) => setPassword(event.target.value)}
-                value={password}
-                style={
-                  error
-                    ? { border: "1px solid red" }
-                    : { border: "1px solid #68686B" }
-                }
-              />
+              <div className={style.signin__password}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Пароль"
+                  onChange={(event) => setPassword(event.target.value)}
+                  value={password}
+                  style={
+                    error
+                      ? { border: "1px solid red" }
+                      : { border: "1px solid #68686B" }
+                  }
+                />
+                <button
+                  type="button"
+                  className={style.togglePassword}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <EyeOff size={20} color="#001A72" />
+                  ) : (
+                    <Eye size={20} color="#001A72" />
+                  )}
+                </button>
+              </div>
             </form>
 
             {error && (

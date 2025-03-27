@@ -27,7 +27,7 @@ function App() {
     "/user/settings",
 
     // ⬇️ URL's with dynamic params ⬇️
-    /^\/user\/module\/.*/,
+    /^\/user\/modules\/.*/,
     /^\/user\/task\/.*/,
     /^\/user\/task\/complete\/.*/,
     /^\/user\/task\/complete-2\/.*/,
@@ -83,7 +83,7 @@ function App() {
 
             {/* 🔗 :id - для получения конкретного модуля/задания */}
             <Route
-              path="/user/module/:id"
+              path="/user/modules/:id"
               element={
                 <UserModule setOpenMenu={setOpenMenu} openMenu={openMenu} />
               }

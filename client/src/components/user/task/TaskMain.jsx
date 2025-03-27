@@ -1,20 +1,25 @@
 import React from "react";
 import style from "./style.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const TaskMain = () => {
   const navigate = useNavigate();
+
+  /* 👋 Здесь мы храним id модуля */
+  const { state } = useLocation();
 
   return (
     <aside className={style.task}>
       <div className="container__inner">
         <div className={style.task__wrapper}>
           <div className={style.task__top}>
-            <button onClick={() => navigate(-1)}>
+            <button onClick={() => navigate(`/user/modules/${state?.id || 1}`)}>
               вернуться к заданиям модуля
             </button>
 
-            <Link to="/user/task/2">перейти к следующему заданию</Link>
+            <Link to="/user/task/2" state={{ id: state?.id || 1 }}>
+              перейти к следующему заданию
+            </Link>
           </div>
 
           <h1>Модуль “Название модуля”</h1>

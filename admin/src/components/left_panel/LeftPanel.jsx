@@ -4,7 +4,6 @@ import logo from "../../assets/logo.svg";
 import exit from "../../assets/icons/left_panel/exit.svg";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useLocation } from "react-router-dom";
-import { useMatch } from "react-router-dom";
 
 const LeftPanel = ({ setOpenMenu, openMenu }) => {
   const location = useLocation();

@@ -5,6 +5,7 @@ import password from "../../../assets/icons/settings/password.svg";
 import removeAccount from "../../../assets/icons/settings/remove.svg";
 import remove2 from "../../../assets/icons/settings/remove-2.svg";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 const SettingsMain = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -18,6 +19,10 @@ const SettingsMain = () => {
   const [errors, setErrors] = useState({});
   const [infoErrors, setInfoErrors] = useState({});
   const [securityErrors, setSecurityErrors] = useState({});
+
+  const [showPassword1, setShowPassword1] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const [showPassword3, setShowPassword3] = useState(false);
 
   const navigate = useNavigate();
 
@@ -71,7 +76,7 @@ const SettingsMain = () => {
 
   return (
     <aside className={style.settings}>
-      <div className="container__inner">
+      <div className="container__inner_2">
         {openModal && (
           <div className={style.settings__modal}>
             <div className={style.settings__modal__container}>
@@ -122,6 +127,7 @@ const SettingsMain = () => {
                         placeholder="<Имя пользователя>"
                         value={formData.name}
                         onChange={handleChange}
+                        disabled={false}
                       />
                     </div>
 
@@ -159,15 +165,26 @@ const SettingsMain = () => {
               <div className={style.settings__item__main}>
                 <form>
                   <div className={style.settings__form__item}>
-                    <label htmlFor="current-password">Текущий пароль</label>
+                    <label htmlFor="currentPassword">Текущий пароль</label>
                     <div className={style.settings__input__container}>
                       <input
-                        type="password"
-                        id="current-password"
+                        type={showPassword1 ? "text" : "password"}
+                        id="currentPassword"
                         placeholder="<Текущий пароль>"
                         value={formData.currentPassword}
                         onChange={handleChange}
                       />
+                      <button
+                        type="button"
+                        className={style.togglePassword}
+                        onClick={() => setShowPassword1(!showPassword1)}
+                      >
+                        {showPassword1 ? (
+                          <EyeOff size={20} color="#001A72" />
+                        ) : (
+                          <Eye size={20} color="#001A72" />
+                        )}
+                      </button>
                     </div>
 
                     {securityErrors.currentPassword && (
@@ -176,15 +193,27 @@ const SettingsMain = () => {
                   </div>
 
                   <div className={style.settings__form__item}>
-                    <label htmlFor="new-password">Новый пароль</label>
+                    <label htmlFor="newPassword">Новый пароль</label>
                     <div className={style.settings__input__container}>
                       <input
-                        type="password"
-                        id="new-password"
+                        type={showPassword2 ? "text" : "password"}
+                        id="newPassword"
                         placeholder="<Новый пароль>"
                         value={formData.newPassword}
                         onChange={handleChange}
                       />
+
+                      <button
+                        type="button"
+                        className={style.togglePassword}
+                        onClick={() => setShowPassword2(!showPassword2)}
+                      >
+                        {showPassword2 ? (
+                          <EyeOff size={20} color="#001A72" />
+                        ) : (
+                          <Eye size={20} color="#001A72" />
+                        )}
+                      </button>
                     </div>
                     {securityErrors.newPassword && (
                       <span>{securityErrors.newPassword}</span>
@@ -192,24 +221,38 @@ const SettingsMain = () => {
                   </div>
 
                   <div className={style.settings__form__item}>
-                    <label htmlFor="confirm-password">
+                    <label htmlFor="confirmPassword">
                       Новый пароль (ещё раз)
                     </label>
                     <div className={style.settings__input__container}>
                       <input
-                        type="password"
-                        id="confirm-password"
+                        type={showPassword3 ? "text" : "password"}
+                        id="confirmPassword"
                         placeholder="<Новый пароль>"
                         value={formData.confirmPassword}
                         onChange={handleChange}
                       />
+
+                      <button
+                        type="button"
+                        className={style.togglePassword}
+                        onClick={() => setShowPassword3(!showPassword3)}
+                      >
+                        {showPassword3 ? (
+                          <EyeOff size={20} color="#001A72" />
+                        ) : (
+                          <Eye size={20} color="#001A72" />
+                        )}
+                      </button>
                     </div>
 
                     {securityErrors.confirmPassword && (
                       <span>{securityErrors.confirmPassword}</span>
                     )}
                   </div>
-                  <div className={style.settings__form__buttons}>
+                </form>
+
+                <div className={style.settings__form__buttons}>
                     <button type="button" onClick={() => setOpenModal(true)}>
                       <img src={removeAccount} alt="remove" /> Удалить аккаунт
                     </button>
@@ -218,7 +261,6 @@ const SettingsMain = () => {
                       <button onClick={handleSubmitSecurity}>Сохранить</button>
                     </div>
                   </div>
-                </form>
               </div>
             </div>
           </div>

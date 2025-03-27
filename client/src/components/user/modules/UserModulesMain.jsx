@@ -62,7 +62,7 @@ const UserModulesMain = () => {
 
   return (
     <aside className={style.user_modules}>
-      <div className="container__inner">
+      <div className="container__inner_2">
         <div className={style.user_modules__wrapper}>
           <h1>Модули курса “Изучение командной оболочки Bash”</h1>
 
@@ -71,7 +71,7 @@ const UserModulesMain = () => {
               <li key={item._id}>
                 <div className={style.user_modules__item__main}>
                   <Link
-                    to={`/user/module/${item._id}`}
+                    to={`/user/modules/${item._id}`}
                     className={style.user_modules__item__content}
                   >
                     <div className={style.user_modules__item__top}>
@@ -105,7 +105,7 @@ const UserModulesMain = () => {
                     </span>
                   </div>
 
-                  <Link to={`/user/module/${item._id}`}>
+                  <Link to={`/user/modules/${item._id}`}>
                     <img src={polygon} alt="polygon" />
                   </Link>
                 </div>

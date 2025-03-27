@@ -230,4 +230,17 @@
 
 .user_module__theory {
   margin-top: 30px;
+  padding: 30px;
+  background: #dbdfe2;
+  border-radius: var(--border-radius-sm);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user_module__item__content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

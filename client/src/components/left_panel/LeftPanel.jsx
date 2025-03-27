@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
 import logo from "../../assets/logo.svg";
 import exit from "../../assets/icons/left_panel/exit.svg";
@@ -15,6 +15,13 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
   /* Mobile adaptation modules */
   const [openModulesMobile, setOpenModulesMobile] = useState(false);
   const [openModuleTasksId, setOpenModuleTasksId] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const menu = [
     { name: "Главная", url: "/user/main", _id: uuidv4() },
@@ -87,8 +94,13 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
 
   return (
     <React.Fragment>
-      {window.innerWidth > 1320 ? (
-        <aside className={style.left_panel}>
+      {windowWidth > 1320 ? (
+        <aside
+          className={`${style.left_panel} ${
+            location.pathname.startsWith("/user/task/complete") &&
+            style.left_panel__special
+          }`}
+        >
           <div className={style.left_panel__wrapper}>
             <div className={style.left_panel__top}>
               <Link to="/">
@@ -102,7 +114,10 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
               <ul>
                 {menu.map((item) => {
                   const isActive =
-                    item.url === "/"
+                    item.name === "Модули"
+                      ? location.pathname.startsWith(`${item.url}`) ||
+                        location.pathname.startsWith("/user/task")
+                      : item.url === "/"
                       ? location.pathname === "/user"
                       : location.pathname.startsWith(`${item.url}`);
 
@@ -140,14 +155,14 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                               }
                               onMouseLeave={handleMouseLeaveModule}
                             >
-                              <Link to={`/user/module/${module._id}`}>
+                              <Link to={`/user/modules/${module._id}`}>
                                 {module.title}
                               </Link>
                               {hoveredModule === module._id && (
                                 <ul
                                   className={style.left_panel__modules__items}
                                   style={{
-                                    top: taskPosition.top - 200,
+                                    top: taskPosition.top - 240,
                                     left: taskPosition.left,
                                   }}
                                   onMouseEnter={handleMouseEnterTasks}
@@ -157,7 +172,10 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                                     .find((m) => m._id === hoveredModule)
                                     ?.tasks.map((task) => (
                                       <li key={task._id}>
-                                        <Link to={`/user/task/${task._id}`}>
+                                        <Link
+                                          to={`/user/task/${task._id}`}
+                                          state={{ id: module._id }}
+                                        >
                                           {task.title}
                                         </Link>
                                       </li>

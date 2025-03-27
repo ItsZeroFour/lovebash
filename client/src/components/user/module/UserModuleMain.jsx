@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import style from "./style.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const UserModuleMain = () => {
   const [openTheory, setOpenTheory] = useState(false);
+  const { id } = useParams();
 
   return (
     <aside className={style.user_module}>
@@ -66,6 +67,7 @@ const UserModuleMain = () => {
 
           {openTheory ? (
             <div className={style.user_module__theory}>
+              <h3>Теория</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
                 voluptas velit blanditiis corrupti at voluptatibus dolor
@@ -88,21 +90,21 @@ const UserModuleMain = () => {
 
               <ol>
                 <li>
-                  <Link to="/user/task/1">
+                  <Link to="/user/task/1" state={{ id: id }}>
                     <h4>Задание 1</h4>
                     <p style={{ color: "#13bd32" }}>Пройдено</p>
                   </Link>
                 </li>
 
                 <li>
-                  <Link to="/user/task/2">
+                  <Link to="/user/task/2" state={{ id: id }}>
                     <h4>Задание 2</h4>
                     <p style={{ color: "#13bd32" }}>Пройдено</p>
                   </Link>
                 </li>
 
                 <li>
-                  <Link to="/user/task/3">
+                  <Link to="/user/task/3" state={{ id: id }}>
                     <h4>Задание 3</h4>
                     <p style={{ color: "#13bd32" }}>Пройдено</p>
                   </Link>

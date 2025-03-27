@@ -51,7 +51,7 @@
     text-align: right;
   } 
 
-  button {
+  & > button {
     margin-top: 60px;
     width: 100%;
     background: var(--color-blue);
@@ -84,5 +84,20 @@
     font-size: 14px;
     font-family: "Kalnia-sb", sans-serif;
     font-weight: 600;
+  }
+}
+
+.signin__password {
+  position: relative;
+
+  input {
+    padding-right: 40px !important;
+  }
+
+  button {
+    position: absolute;
+    top: 30%;
+    background: none;
+    left: 90%;
   }
 }
