@@ -34,7 +34,7 @@
 
 .user__info {
   ul {
-    margin-top: 20px;
+    margin-top: 10px;
 
     display: flex;
     flex-wrap: wrap;
@@ -42,19 +42,47 @@
     li {
       width: 50%;
       font-size: 20px;
-      margin-top: 10px;
+      margin-top: 5px;
+
+      &:nth-child(even) {
+        display: flex;
+        justify-content: end;
+        align-items: end;
+
+        @media (max-width: 970px) {
+          justify-content: start;
+          align-items: start;
+        }
+      }
 
       p {
         display: flex;
         position: relative;
+        font-size: 18px;
 
         div {
           margin-left: 10px;
           position: absolute;
-          left: 33%;
+          left: 170px;
 
           z-index: 2;
           // width: 100%;
+
+          // @media (max-width: 1485px) {
+          //   left: 31%;
+          // }
+
+          // @media (max-width: 1400px) {
+          //   left: 33%;
+          // }
+
+          // @media (max-width: 1340px) {
+          //   left: 35%;
+          // }
+
+          @media (max-width: 450px) {
+            left: 130px;
+          }
         }
 
         span {
@@ -71,7 +99,7 @@
       }
     }
 
-    @media (max-width: 890px) {
+    @media (max-width: 970px) {
       flex-direction: column;
     }
   }
@@ -81,10 +109,21 @@
   ul {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 10px;
 
     li {
       width: 50%;
+
+      &:nth-child(even) {
+        display: flex;
+        justify-content: end;
+        align-items: end;
+
+        @media (max-width: 970px) {
+          justify-content: start;
+          align-items: start;
+        }
+      }
 
       p {
         font-size: 20px;
@@ -112,7 +151,7 @@
 .user__tasks {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 
 .user__tasks__main__info {
@@ -139,11 +178,11 @@
   }
 
   .user__tasks__info {
-    margin-top: 20px;
+    margin-top: 10px;
 
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 
     p {
       font-weight: 600;
@@ -153,6 +192,8 @@
       text-align: left;
       background: none;
       text-decoration: underline;
+      font-weight: 600;
+      color: var(--color-dark-blue);
     }
   }
 }
@@ -251,7 +292,7 @@
     align-items: center;
 
     padding: 10px;
-    gap: 30px;
+    gap: 20px;
 
     h4 {
       color: var(--color-white);

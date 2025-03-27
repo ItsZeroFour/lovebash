@@ -85,7 +85,7 @@ const Users = () => {
               </td>
               <td>xxxxxxx</td>
               <td>Имя пользователя</td>
-              <td>73872837</td>
+              <td>гггг-мм-дд чч-мм-сс</td>
               <td>гггг-мм-дд</td>
               <td>
                 <button

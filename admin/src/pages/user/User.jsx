@@ -199,7 +199,7 @@ const User = () => {
                     <ol>
                       {module.tasks.map((task) => (
                         <li key={task.id}>
-                          <Link to={`/users/tasks/${task.id}`}>
+                          <Link to={`/users/task/${task.id}`}>
                             <p>{task.title}</p>
                             <p
                               style={

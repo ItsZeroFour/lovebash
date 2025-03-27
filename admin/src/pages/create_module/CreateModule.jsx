@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import style from "./style.module.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
 import arrowUp from "../../assets/icons/create_module/arrow-up.svg";
 import arrowDown from "../../assets/icons/create_module/arrow-down.svg";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 
 const CreateModule = () => {
-  const [description, setDescription] = useState("");
-  const [theory, setTheory] = useState("");
+  const [description, setDescription] = useState(undefined);
+  const [theory, setTheory] = useState(undefined);
   const [title, setTitle] = useState("");
   const [isEditingMode, setIsEditingMode] = useState(true);
   const [selectedTasks, setSelectedTasks] = useState([]);
@@ -68,7 +70,7 @@ const CreateModule = () => {
         <div className={style.create_module__wrapper}>
           <div className={style.create_module__top}>
             <h2>
-              {state ? `Редактирование модуля ${state.id}` : "Создание модуля"}
+              {state ? `Редактирование модуля ${state?.id}` : "Создание модуля"}
             </h2>
 
             <div className={style.create_module__top__buttons}>
@@ -123,7 +125,10 @@ const CreateModule = () => {
                   )}
                 </div>
 
-                <div className={style.create_module__text}>
+                <div
+                  className={style.create_module__text}
+                  data-color-mode="light"
+                >
                   <p>Краткое описание модуля</p>
                   <MDEditor value={description} onChange={setDescription} />
                   {errors.description && (
@@ -131,9 +136,12 @@ const CreateModule = () => {
                   )}
                 </div>
 
-                <div className={style.create_module__text}>
+                <div
+                  className={style.create_module__text}
+                  data-color-mode="light"
+                >
                   <p>Теория к модулю</p>
-                  <MDEditor value={theory} onChange={setTheory} />
+                  <MDEditor value={theory} onChange={setTheory} theme="light" />
                   {errors.theory && (
                     <span className={style.error}>{errors.theory}</span>
                   )}
@@ -170,7 +178,9 @@ const CreateModule = () => {
                   <div className={style.create_module__tasks}>
                     <p>Задания</p>
                     <button onClick={toggleSelect}>
-                      {isSelectOpen ? "Скрыть задания" : "Показать задания"}
+                      {isSelectOpen
+                        ? "Скрыть задания"
+                        : "Выберите задания из списка"}
                     </button>
                     {isSelectOpen && (
                       <select
@@ -191,7 +201,14 @@ const CreateModule = () => {
 
                     <ol>
                       {selectedTasks.map((item, index) => (
-                        <li key={item}>
+                        <li
+                          key={item}
+                          onClick={() =>
+                            navigate(`/tasks/create`, {
+                              state: { id: item },
+                            })
+                          }
+                        >
                           <p>{index + 1}.</p>
 
                           <div
@@ -225,7 +242,17 @@ const CreateModule = () => {
             <div className={style.create_module__preview}>
               <div className={style.create_module__preview__module}>
                 <h3>{title}</h3>
-                <p>{description}</p>
+                {/* 🧐 Эта конструкция служит для отображения текста, который мы ввели в редактор */}
+                <MDEditor.Markdown
+                  source={description}
+                  style={{
+                    backgroundColor: "transparent",
+                    color: "#000",
+                    fontFamily: "Kalnia",
+                    lineHeight: 1,
+                    marginBottom: "5px",
+                  }}
+                />
 
                 <div className={style.create_module__preview__module__buttons}>
                   <button>{selectedTasks.length} заданий</button>
@@ -281,7 +308,17 @@ const CreateModule = () => {
                 <div className={style.create_module__preview__theory}>
                   <h3>Теория</h3>
 
-                  <p>{theory}</p>
+                  {/* 🧐 Эта конструкция служит для отображения текста, который мы ввели в редактор */}
+                  <MDEditor.Markdown
+                    source={theory}
+                    style={{
+                      backgroundColor: "transparent",
+                      color: "#000",
+                      fontFamily: "Kalnia",
+                      lineHeight: 1,
+                      marginBottom: "5px",
+                    }}
+                  />
                 </div>
               )}
             </div>

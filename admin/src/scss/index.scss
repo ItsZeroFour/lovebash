@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Kalnia:wght@100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "./reset";
 @import "./vars";
 @import "./fonts";
@@ -22,7 +24,7 @@ body {
 
   overflow-x: hidden;
 
-  background: #EDEEEF;
+  background: #edeeef;
   color: var(--color-black);
 
   @media (max-height: 610px) {
@@ -110,4 +112,10 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.wmde-markdown p {
+  margin-bottom: 5px !important;
+  line-height: 100% !important;
+  font-size: 15px !important;
 }

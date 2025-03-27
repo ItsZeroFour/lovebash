@@ -84,21 +84,25 @@ const FileStorage = () => {
           </div>
 
           <div className={style.file_storage__filter}>
-            <input
-              type="text"
-              placeholder="Поиск по названию..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <div className={style.file_storage__filter__search}>
+              <input
+                type="text"
+                placeholder="Поиск по названию..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
 
-            <select
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-            >
-              <option value="">Типы файлов</option>
-              <option value="Тип 1">Тип 1</option>
-              <option value="Тип 2">Тип 2</option>
-            </select>
+            <div className={style.file_storage__filter__select}>
+              <select
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+              >
+                <option value="">Типы файлов</option>
+                <option value="Тип 1">Тип 1</option>
+                <option value="Тип 2">Тип 2</option>
+              </select>
+            </div>
           </div>
 
           <table>

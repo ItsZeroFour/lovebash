@@ -35,6 +35,45 @@
   justify-content: space-between;
   align-items: center;
 
+  .modules__filter__search {
+    position: relative;
+
+    input {
+      padding-left: 40px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+
+      left: 3%;
+      top: 30%;
+
+      width: 25px;
+      height: 25px;
+
+      background: url("../../assets/icons/loupe.svg");
+      background-repeat: no-repeat;
+    }
+  }
+
+  .modules__filter__select {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+
+      left: 82%;
+      top: 32%;
+
+      width: 20px;
+      height: 20px;
+
+      background: url("../../assets/icons/arrow.svg");
+    }
+  }
+
   input {
     padding: 15px;
     border: 2px solid var(--color-dark-blue);
@@ -48,6 +87,11 @@
 
   select {
     padding: 15px;
+
+    appearance: none;
+    padding-right: 40px;
+
+    font-weight: 600;
 
     border: 2px solid var(--color-dark-blue);
     border-radius: var(--border-radius-sm);
@@ -102,6 +146,7 @@
         padding-bottom: 10px;
         text-align: center;
         position: relative;
+        font-size: 18px;
 
         button {
           background: none;

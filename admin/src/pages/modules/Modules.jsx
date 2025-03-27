@@ -84,21 +84,25 @@ const Modules = () => {
           </div>
 
           <div className={style.modules__filter}>
-            <input
-              type="text"
-              placeholder="Поиск по названию..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <div className={style.modules__filter__search}>
+              <input
+                type="text"
+                placeholder="Поиск по названию..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
 
-            <select
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value)}
-            >
-              <option value="">Статусы</option>
-              <option value="Доступен">Доступен</option>
-              <option value="Не доступен">Не доступен</option>
-            </select>
+            <div className={style.modules__filter__select}>
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+              >
+                <option value="">Статусы</option>
+                <option value="Доступен">Доступен</option>
+                <option value="Не доступен">Не доступен</option>
+              </select>
+            </div>
           </div>
 
           <table>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.scss";
 import logo from "../../assets/logo.svg";
 import exit from "../../assets/icons/left_panel/exit.svg";
@@ -15,6 +15,13 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
   /* Mobile adaptation modules */
   const [openModulesMobile, setOpenModulesMobile] = useState(false);
   const [openModuleTasksId, setOpenModuleTasksId] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const menu = [
     { name: "Главная", url: "/", _id: uuidv4() },
@@ -88,7 +95,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
 
   return (
     <React.Fragment>
-      {window.innerWidth > 1320 ? (
+      {windowWidth > 1320 ? (
         <aside className={style.left_panel}>
           <div className={style.left_panel__wrapper}>
             <div className={style.left_panel__top}>

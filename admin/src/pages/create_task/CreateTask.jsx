@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
 import plus from "../../assets/icons/create_task/plus.svg";
 import cross from "../../assets/icons/create_task/cross.svg";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 
 const CreateTask = () => {
   const [description, setDescription] = useState("");
@@ -13,7 +15,6 @@ const CreateTask = () => {
   const [status, setStatus] = useState("active"); // Установка значения по умолчанию
   const [validity, setValidity] = useState("true"); // Установка значения по умолчанию
   const [terminalUsage, setTerminalUsage] = useState("on"); // Установка значения по умолчанию
-  const [commandUsage, setCommandUsage] = useState("on"); // Стейт для использования терминала
   const [commandRestriction, setCommandRestriction] = useState("on"); // Стейт для ограничения команд
   const [errors, setErrors] = useState({
     title: "",
@@ -21,7 +22,6 @@ const CreateTask = () => {
     correctAnswer: "",
   });
 
-  const [fileCount, setFileCount] = useState(0);
   const [files, setFiles] = useState([]); // Стейт для хранения файлов
 
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const CreateTask = () => {
   console.log(state);
 
   const addFile = () => {
-    setFiles([...files, { type: "", count: 0 }]); // Добавляем новый файл с пустыми значениями
+    setFiles([...files, { type: "", count: 0, path: "" }]); // Добавляем новый файл с пустыми значениями
   };
 
   const handleFileTypeChange = (index, value) => {
@@ -44,6 +44,17 @@ const CreateTask = () => {
   const handleFileCountChange = (index, value) => {
     const newFiles = [...files];
     newFiles[index].count = value;
+    setFiles(newFiles);
+  };
+
+  const handleFilePathChange = (index, value) => {
+    const newFiles = [...files];
+    newFiles[index].path = value;
+    setFiles(newFiles);
+  };
+
+  const removeFile = (index) => {
+    const newFiles = files.filter((_, i) => i !== index);
     setFiles(newFiles);
   };
 
@@ -68,7 +79,11 @@ const CreateTask = () => {
       <div className="container__inner">
         <div className={style.create_task__wrapper}>
           <div className={style.create_task__top}>
-            <h2>Создание задания</h2>
+            <h2>
+              {state
+                ? `Просмотр/редактирование задания ${state?.id}`
+                : "Создание задания"}
+            </h2>
 
             <div className={style.create_task__top__buttons}>
               <button onClick={handleSave}>Сохранить</button>
@@ -90,7 +105,7 @@ const CreateTask = () => {
                 {errors.title && <p className={style.error}>{errors.title}</p>}
               </div>
 
-              <div className={style.create_task__text}>
+              <div className={style.create_task__text} data-color-mode="light">
                 <p>Текст задания</p>
                 <MDEditor value={description} onChange={setDescription} />
                 {errors.description && (
@@ -211,6 +226,7 @@ const CreateTask = () => {
                     <input
                       type="text"
                       placeholder="Введите список команд через запятую..."
+                      disabled={commandRestriction === "off"}
                     />
                   </div>
 
@@ -232,65 +248,72 @@ const CreateTask = () => {
 
                     <ul>
                       {files.map((file, index) => (
-                        <li
-                          key={index}
-                          className={style.create_task__file__item}
-                        >
-                          <select
-                            value={file.type}
-                            onChange={(e) =>
-                              handleFileTypeChange(index, e.target.value)
-                            }
-                          >
-                            <option value="" disabled hidden>
-                              Выберите тип файла
-                            </option>
-                            <option value="Тип 1">Тип файла 1</option>
-                            <option value="Тип 2">Тип файла 2</option>
-                            <option value="Тип 3">Тип файла 3</option>
-                            <option value="Тип 4">Тип файла 4</option>
-                          </select>
-
-                          <div className={style.create_task__file__item__count}>
-                            <p>кл-во</p>
-                            <input
-                              type="number"
-                              value={file.count}
+                        <React.Fragment key={index}>
+                          <li className={style.create_task__file__item}>
+                            <select
+                              value={file.type}
                               onChange={(e) =>
-                                handleFileCountChange(index, e.target.value)
+                                handleFileTypeChange(index, e.target.value)
+                              }
+                            >
+                              <option value="" disabled hidden>
+                                Выберите тип файла
+                              </option>
+                              <option value="Тип 1">Тип файла 1</option>
+                              <option value="Тип 2">Тип файла 2</option>
+                              <option value="Тип 3">Тип файла 3</option>
+                              <option value="Тип 4">Тип файла 4</option>
+                            </select>
+
+                            <div
+                              className={style.create_task__file__item__count}
+                            >
+                              <p>кл-во</p>
+                              <input
+                                type="number"
+                                value={file.count}
+                                onChange={(e) =>
+                                  handleFileCountChange(index, e.target.value)
+                                }
+                              />
+                            </div>
+
+                            <button
+                              className={style.create_task__file__item__delete}
+                              onClick={() => removeFile(index)}
+                            >
+                              <img src={cross} alt="cross" />
+                            </button>
+                          </li>
+
+                          <div className={style.create_task__file__item__path}>
+                            <p>
+                              Укажите путь, куда будет производиться загрузка
+                              выбранных типов файлов.
+                            </p>
+                            <div
+                              className={
+                                style.create_task__file__item__path__default
+                              }
+                            >
+                              <p>Каталог по умолчанию: /home/$USER/Tasks.</p>
+                              <p>
+                                Путь указывается относительно /home/$USER/Tasks.
+                              </p>
+                            </div>
+
+                            <input
+                              type="text"
+                              placeholder="dir1/dir2"
+                              value={file.path}
+                              onChange={(e) =>
+                                handleFilePathChange(index, e.target.value)
                               }
                             />
                           </div>
-
-                          <button
-                            className={style.create_task__file__item__delete}
-                          >
-                            <img src={cross} alt="cross" />
-                          </button>
-                        </li>
+                        </React.Fragment>
                       ))}
                     </ul>
-
-                    {files.length > 0 && (
-                      <div className={style.create_task__file__item__path}>
-                        <p>
-                          Укажите путь, куда будет производиться загрузка
-                          выбранных типов файлов.
-                        </p>
-                        <div
-                          className={
-                            style.create_task__file__item__path__default
-                          }
-                        >
-                          <p>Каталог по умолчанию: /home/$USER/Tasks.</p>
-                          <p>
-                            Путь указывается относительно /home/$USER/Tasks.
-                          </p>
-                        </div>
-
-                        <input type="text" placeholder="dir1/dir2" />
-                      </div>
-                    )}
                   </div>
                   {/* !- Files */}
                 </React.Fragment>
@@ -383,7 +406,7 @@ const CreateTask = () => {
                 </div>
 
                 <div className={style.create_task__tasks}>
-                  <p>Задания</p>
+                  <p>Модуль</p>
 
                   <select>
                     <option value="" selected disabled hidden>
