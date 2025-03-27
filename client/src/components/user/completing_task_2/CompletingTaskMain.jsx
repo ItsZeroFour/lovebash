@@ -4,18 +4,12 @@ import book from "../../../assets/icons/completing_task/book.svg";
 import answer from "../../../assets/icons/completing_task/answer.svg";
 import { useNavigate } from "react-router-dom";
 import paper from "../../../assets/icons/completing_task/paper.svg";
+import MonacoEditor from "@monaco-editor/react";
 
 const CompletingTaskMain = () => {
   const [openModalFailed, setOpenModalFailed] = useState(false);
-  const [answers, setAnswers] = useState(Array(5).fill("")); // Стейт для списка ответов
+  const [answers, setAnswers] = useState("");
   const navigate = useNavigate();
-
-  const handleInputChange = (index, value) => {
-    const trimmedValue = value.trim(); // Удаление пробелов в начале и в конце
-    const newAnswers = [...answers];
-    newAnswers[index] = trimmedValue;
-    setAnswers(newAnswers);
-  };
 
   const handleFinish = () => {
     if (answers.some((answer) => answer === "")) {
@@ -23,6 +17,10 @@ const CompletingTaskMain = () => {
     } else {
       setOpenModalFailed(true);
     }
+  };
+
+  const handleEditorChange = (value) => {
+    setAnswers(value);
   };
 
   return (
@@ -127,18 +125,20 @@ const CompletingTaskMain = () => {
               <p>Поле для ответа</p>
             </div>
 
-            <ol>
-              {answers.map((answer, index) => (
-                <li key={index}>
-                  <input
-                    type="text"
-                    placeholder="Введите ответ"
-                    value={answer}
-                    onChange={(e) => handleInputChange(index, e.target.value)}
-                  />
-                </li>
-              ))}
-            </ol>
+            <MonacoEditor
+              height="35vh"
+              defaultLanguage="plaintext"
+              value={answers}
+              onChange={handleEditorChange}
+              theme="vs-gray"
+              options={{
+                minimap: { enabled: false },
+                lineNumbers: "on",
+                wordWrap: "on",
+                fontSize: 14,
+                scrollBeyondLastLine: false,
+              }}
+            />
           </div>
 
           <div className={style.completing_task__bottom}>

@@ -1,7 +1,19 @@
+.completing_task__container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px); /* Устанавливаем высоту на 100% высоты экрана */
+  overflow: hidden; /* Скрываем вертикальную прокрутку */
+  position: relative;
+
+  @media (max-width: 1020px) {
+    height: 100%;
+  }
+}
+
 .completing_task__wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
 }
 
 .completing_task__top {
@@ -39,7 +51,7 @@
   }
 
   .completing_task__top__text {
-    height: 280px;
+    height: 150px;
     overflow: auto;
     padding: 10px;
 
@@ -51,7 +63,6 @@
 
 .completing_task__top__answer {
   background: rgba(11, 49, 69, 0.25);
-  height: 100%;
   flex-grow: 2;
 
   .completing_task__top__answer__top {
