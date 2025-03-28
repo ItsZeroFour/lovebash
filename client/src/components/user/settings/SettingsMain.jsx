@@ -54,7 +54,8 @@ const SettingsMain = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
+    // Удаляем пробелы из значения
+    setFormData({ ...formData, [id]: value.trim() });
   };
 
   const handleSubmitInfo = (e) => {

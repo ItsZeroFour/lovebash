@@ -5,6 +5,12 @@ import exit from "../../assets/icons/left_panel/exit.svg";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useLocation } from "react-router-dom";
 
+const MAX_LENGTH = 15; // Максимальная длина текста перед сокращением
+
+const truncateText = (text, length) => {
+  return text.length > length ? text.substring(0, length) + "..." : text;
+};
+
 const LeftPanel = ({ setOpenMenu, openMenu }) => {
   const location = useLocation();
   /* Modules */
@@ -32,10 +38,13 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
 
   const modules = [
     {
-      title: "Модуль 1",
+      title: "Очень длинное название модуля 1, которое надо сократить",
       _id: "module-1",
       tasks: [
-        { title: "Задание 1", _id: uuidv4() },
+        {
+          title: "Очень длинное название задания 1, которое надо сократить",
+          _id: uuidv4(),
+        },
         { title: "Задание 2", _id: uuidv4() },
       ],
     },
@@ -155,8 +164,11 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                               }
                               onMouseLeave={handleMouseLeaveModule}
                             >
-                              <Link to={`/user/modules/${module._id}`}>
-                                {module.title}
+                              <Link
+                                to={`/user/modules/${module._id}`}
+                                title={module.title}
+                              >
+                                {truncateText(module.title, MAX_LENGTH)}
                               </Link>
                               {hoveredModule === module._id && (
                                 <ul
@@ -174,9 +186,9 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                                       <li key={task._id}>
                                         <Link
                                           to={`/user/task/${task._id}`}
-                                          state={{ id: module._id }}
+                                          title={task.title}
                                         >
-                                          {task.title}
+                                          {truncateText(task.title, MAX_LENGTH)}
                                         </Link>
                                       </li>
                                     ))}

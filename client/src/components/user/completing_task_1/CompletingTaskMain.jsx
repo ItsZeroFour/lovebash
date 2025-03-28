@@ -9,12 +9,13 @@ import MonacoEditor from "@monaco-editor/react";
 const CompletingTaskMain = () => {
   const [openModalFailed, setOpenModalFailed] = useState(false);
   const [openModalSuccess, setOpenModalSuccess] = useState(false);
+  const [openModalFailed2, setOpenModalFailed2] = useState(false);
   const [answers, setAnswers] = useState("");
   const navigate = useNavigate();
 
   const handleFinish = () => {
     if (answers === "") {
-      alert("Пожалуйста, заполните все поля ответов."); // Уведомление о незаполненных полях
+      setOpenModalFailed2(true);
       return;
     }
 
@@ -58,6 +59,33 @@ const CompletingTaskMain = () => {
                 </button>
                 <button onClick={() => window.location.reload()}>
                   Попробовать еще раз
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {openModalFailed2 && (
+          <div className={style.completing_task__modal}>
+            <div className={style.completing_task__modal__container}>
+              <div className={style.completing_task__modal__top}>
+                <img src={paper} alt="paper" />
+                <h4>Ошибка</h4>
+              </div>
+
+              <p>Пожалуйста, заполните все поля</p>
+
+              <div className={style.completing_task__modal__buttons}>
+                <button
+                  onClick={() => {
+                    setOpenModalFailed(false);
+                    navigate(-1);
+                  }}
+                >
+                  Вернуться к заданиям
+                </button>
+                <button onClick={() => setOpenModalFailed2(false)}>
+                  Отмена
                 </button>
               </div>
             </div>
