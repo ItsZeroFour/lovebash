@@ -412,6 +412,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
+
+  button {
+    background: none;
+  }
 }
 
 .create_task__file {
@@ -427,9 +431,19 @@
 
       margin-top: 30px;
 
+      width: 50%;
+
       select {
         width: 50%;
-        padding: 20px;
+        height: 60px;
+      }
+
+      .create_task__file__item__delete {
+        background: none;
+      }
+
+      @media (max-width: 700px) {
+        width: 100%;
       }
     }
   }

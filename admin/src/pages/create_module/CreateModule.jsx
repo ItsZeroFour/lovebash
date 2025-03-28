@@ -201,17 +201,15 @@ const CreateModule = () => {
 
                     <ol>
                       {selectedTasks.map((item, index) => (
-                        <li
-                          key={item}
-                          onClick={() =>
-                            navigate(`/tasks/create`, {
-                              state: { id: item },
-                            })
-                          }
-                        >
+                        <li key={item}>
                           <p>{index + 1}.</p>
 
                           <div
+                            onClick={() =>
+                              navigate(`/tasks/create`, {
+                                state: { id: item },
+                              })
+                            }
                             className={
                               style.create_module__tasks__selected__item
                             }
@@ -224,10 +222,20 @@ const CreateModule = () => {
                               style.create_module__tasks__selected__buttons
                             }
                           >
-                            <button onClick={() => moveTask(index, -1)}>
+                            <button
+                              onClick={(event) => {
+                                event.preventDefault();
+                                moveTask(index, -1);
+                              }}
+                            >
                               <img src={arrowUp} alt="up" />
                             </button>
-                            <button onClick={() => moveTask(index, 1)}>
+                            <button
+                              onClick={(event) => {
+                                event.preventDefault();
+                                moveTask(index, 1);
+                              }}
+                            >
                               <img src={arrowDown} alt="down" />
                             </button>
                           </div>

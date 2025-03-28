@@ -94,6 +94,12 @@ li {
   list-style-type: none;
 }
 
+ol {
+  li {
+    list-style-type: numeric;
+  }
+}
+
 input,
 textarea {
   font-family: "Kalnia", sans-serif;
@@ -118,4 +124,12 @@ footer {
   margin-bottom: 5px !important;
   line-height: 100% !important;
   font-size: 15px !important;
+}
+
+.wmde-markdown {
+  ul {
+    li {
+      list-style-type: disc;
+    }
+  }
 }

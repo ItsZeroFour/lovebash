@@ -23,7 +23,7 @@
     padding: 20px;
     border-radius: 5px;
 
-    width: 270px;
+    width: 290px;
 
     display: flex;
     flex-direction: column;
@@ -78,14 +78,14 @@
 }
 
 .user_main__graph {
-  height: 600px;
+  height: auto;
   min-width: 925px;
   background: #f0f1f1;
 
   border-radius: 5px;
   border: 1px solid rgba(11, 49, 69, 0.2);
 
-  margin-top: 80px;
+  margin-top: 40px;
   margin-bottom: 40px;
   padding: 20px;
 

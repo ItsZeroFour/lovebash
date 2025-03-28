@@ -28,7 +28,7 @@ const Main = () => {
   const [activePeriod, setActivePeriod] = useState("День");
 
   const labels = [
-    "Название модуля 1",
+    "Название модуля 1 Название модуля 1 Название модуля 1",
     "Название модуля 2",
     "Название модуля 3",
     "Название модуля 4",
@@ -67,6 +67,26 @@ const Main = () => {
         display: true,
         text: "Пользователи",
         position: "left",
+      },
+      tooltip: {
+        callbacks: {
+          title: (tooltipItems) => {
+            return tooltipItems[0].label; // Показывает полное название модуля в тултипе
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          callback: function (value, index, values) {
+            const label = labels[index];
+            return label.length > 15 ? label.slice(0, 15) + "..." : label;
+          },
+          title: {
+            display: false,
+          },
+        },
       },
     },
   };

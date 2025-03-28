@@ -182,7 +182,9 @@ const User = () => {
                     <button
                       onClick={(event) => {
                         event.preventDefault();
-                        setOpenModuleTasks(module.id);
+                        setOpenModuleTasks(
+                          openModuleTasks === module.id ? null : module.id
+                        );
                       }}
                     >
                       Количество заданий: {module.tasks.length}
