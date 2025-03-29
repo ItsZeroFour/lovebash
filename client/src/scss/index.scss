@@ -117,3 +117,8 @@ footer {
   flex-direction: column;
   width: 100%;
 }
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

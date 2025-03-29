@@ -5,7 +5,7 @@ import exit from "../../assets/icons/left_panel/exit.svg";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useLocation } from "react-router-dom";
 
-const MAX_LENGTH = 15; // Максимальная длина текста перед сокращением
+const MAX_LENGTH = 25; // Максимальная длина текста перед сокращением
 
 const truncateText = (text, length) => {
   return text.length > length ? text.substring(0, length) + "..." : text;
@@ -166,7 +166,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                             >
                               <Link
                                 to={`/user/modules/${module._id}`}
-                                title={module.title}
+                                // title={module.title}
                               >
                                 {truncateText(module.title, MAX_LENGTH)}
                               </Link>
@@ -186,7 +186,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                                       <li key={task._id}>
                                         <Link
                                           to={`/user/task/${task._id}`}
-                                          title={task.title}
+                                          // title={task.title}
                                         >
                                           {truncateText(task.title, MAX_LENGTH)}
                                         </Link>
@@ -267,7 +267,10 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                                 <ol>
                                   {item.tasks.map((task) => (
                                     <li key={task._id}>
-                                      <Link to={`/task/${task._id}`}>
+                                      <Link
+                                        to={`/user/task/${task._id}`}
+                                        onClick={() => setOpenMenu(false)}
+                                      >
                                         {task.title}
                                       </Link>
                                     </li>

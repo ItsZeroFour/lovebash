@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import style from "./style.module.scss";
 import book from "../../../assets/icons/completing_task/book.svg";
 import answer from "../../../assets/icons/completing_task/answer.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import paper from "../../../assets/icons/completing_task/paper.svg";
 import MonacoEditor from "@monaco-editor/react";
 
@@ -12,6 +12,7 @@ const CompletingTaskMain = () => {
   const [openModalFailed2, setOpenModalFailed2] = useState(false);
   const [answers, setAnswers] = useState("");
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleFinish = () => {
     if (answers === "") {
@@ -52,7 +53,7 @@ const CompletingTaskMain = () => {
                 <button
                   onClick={() => {
                     setOpenModalFailed(false);
-                    navigate(-1);
+                    navigate(`/user/modules/${state?.id || 1}`);
                   }}
                 >
                   Вернуться к заданиям
@@ -79,7 +80,7 @@ const CompletingTaskMain = () => {
                 <button
                   onClick={() => {
                     setOpenModalFailed(false);
-                    navigate(-1);
+                    navigate(`/user/modules/${state?.id || 1}`);
                   }}
                 >
                   Вернуться к заданиям
