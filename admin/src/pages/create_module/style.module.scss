@@ -325,6 +325,7 @@
 
     li {
       position: relative;
+      list-style-type: none;
 
       a {
         display: flex;
@@ -379,4 +380,3 @@
 .error {
   color: red;
 }
-

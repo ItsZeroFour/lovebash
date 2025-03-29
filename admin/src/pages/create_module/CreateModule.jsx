@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import style from "./style.module.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
@@ -8,8 +8,8 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 
 const CreateModule = () => {
-  const [description, setDescription] = useState(undefined);
-  const [theory, setTheory] = useState(undefined);
+  const [description, setDescription] = useState("");
+  const [theory, setTheory] = useState("");
   const [title, setTitle] = useState("");
   const [isEditingMode, setIsEditingMode] = useState(true);
   const [selectedTasks, setSelectedTasks] = useState([]);
