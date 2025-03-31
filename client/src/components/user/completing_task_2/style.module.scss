@@ -61,6 +61,16 @@
       font-size: 14px;
     }
   }
+
+  @media (max-width: 710px) {
+    width: 100%;
+  }
+}
+
+.completing_task__top__item__theory {
+  .completing_task__top__text {
+    height: 40vh;
+  }
 }
 
 .completing_task__top__answer {

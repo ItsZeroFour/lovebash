@@ -105,7 +105,9 @@ const CompletingTaskMain = () => {
               </div>
             </div>
 
-            <div className={style.completing_task__top__item}>
+            <div
+              className={`${style.completing_task__top__item} ${style.completing_task__top__item__theory}`}
+            >
               <div className={style.completing_task__top__item__top}>
                 <img src={book} alt="book" />
                 <p>Теория</p>
@@ -115,6 +117,39 @@ const CompletingTaskMain = () => {
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Est
                   assumenda pariatur sed omnis eius ipsum temporibus debitis
+                  ipsa vero animi repellat minus non eum doloremque, deleniti
+                  libero corporis nisi asperiores aut. Officia, sit pariatur
+                  iure delectus incidunt asperiores temporibus laborum aut optio
+                  praesentium nihil consequuntur enim animi accusamus sequi
+                  voluptates facere ipsam eligendi quibusdam architecto cumque,
+                  sapiente dolor ullam! Molestiae autem enim harum minus vitae
+                  labore commodi consectetur ab rem quas aut similique non
+                  veniam modi perferendis provident, magni atque impedit cum
+                  veritatis. Quidem labore porro pariatur. Libero, praesentium
+                  inventore dolorum quis a id quos odio ducimus explicabo ipsam
+                  esse. orem ipsum dolor sit amet consectetur adipisicing elit.
+                  Est assumenda pariatur sed omnis eius ipsum temporibus debitis
+                  ipsa vero animi repellat minus non eum doloremque, deleniti
+                  libero corporis nisi asperiores aut. Officia, sit pariatur
+                  iure delectus incidunt asperiores temporibus laborum aut optio
+                  praesentium nihil consequuntur enim animi accusamus sequi
+                  voluptates facere ipsam eligendi quibusdam architecto cumque,
+                  sapiente dolor ullam! Molestiae autem enim harum minus vitae
+                  labore commodi consectetur ab rem quas aut similique non
+                  veniam modi perferendis provident, magni atque impedit cum
+                  veritatis. Quidem labore porro pariatur. Libero, praesentium
+                  inventore dolorum quis a id quos odio ducimus explicabo ipsam
+                  esse. libero corporis nisi asperiores aut. Officia, sit
+                  pariatur iure delectus incidunt asperiores temporibus laborum
+                  aut optio praesentium nihil consequuntur enim animi accusamus
+                  sequi voluptates facere ipsam eligendi quibusdam architecto
+                  cumque, sapiente dolor ullam! Molestiae autem enim harum minus
+                  vitae labore commodi consectetur ab rem quas aut similique non
+                  veniam modi perferendis provident, magni atque impedit cum
+                  veritatis. Quidem labore porro pariatur. Libero, praesentium
+                  inventore dolorum quis a id quos odio ducimus explicabo ipsam
+                  esse. orem ipsum dolor sit amet consectetur adipisicing elit.
+                  Est assumenda pariatur sed omnis eius ipsum temporibus debitis
                   ipsa vero animi repellat minus non eum doloremque, deleniti
                   libero corporis nisi asperiores aut. Officia, sit pariatur
                   iure delectus incidunt asperiores temporibus laborum aut optio

@@ -69,6 +69,26 @@ const RegisterMain = () => {
     navigate("/user/main");
   };
 
+  const handleLoginChange = (event) => {
+    const value = event.target.value.replace(/\s/g, ""); // Удаляем пробелы
+    setLogin(value);
+  };
+
+  const handleEmailChange = (event) => {
+    const value = event.target.value.replace(/\s/g, ""); // Удаляем пробелы
+    setEmail(value);
+  };
+
+  const handlePasswordChange = (event) => {
+    const value = event.target.value.replace(/\s/g, ""); // Удаляем пробелы
+    setPassword(value);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    const value = event.target.value.replace(/\s/g, ""); // Удаляем пробелы
+    setConfirmPassword(value);
+  };
+
   return (
     <section className={style.register}>
       {openModal && (
@@ -106,7 +126,7 @@ const RegisterMain = () => {
               <input
                 type="text"
                 placeholder="Имя пользователя"
-                onChange={(event) => setLogin(event.target.value.trim())}
+                onChange={handleLoginChange}
                 value={login}
                 style={{
                   border: error ? "1px solid red" : "1px solid #68686B",
@@ -116,7 +136,7 @@ const RegisterMain = () => {
               <input
                 type="text"
                 placeholder="Адрес электронной почты"
-                onChange={(event) => setEmail(event.target.value.trim())}
+                onChange={handleEmailChange}
                 value={email}
                 style={{
                   border: error ? "1px solid red" : "1px solid #68686B",
@@ -127,7 +147,7 @@ const RegisterMain = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Пароль"
-                  onChange={(event) => setPassword(event.target.value)}
+                  onChange={handlePasswordChange}
                   value={password}
                   style={
                     error
@@ -152,9 +172,7 @@ const RegisterMain = () => {
                 <input
                   type={showPassword2 ? "text" : "password"}
                   placeholder="Подтвердите пароль"
-                  onChange={(event) =>
-                    setConfirmPassword(event.target.value.trim())
-                  }
+                  onChange={handleConfirmPasswordChange}
                   value={confirmPassword}
                   style={{
                     border: error ? "1px solid red" : "1px solid #68686B",

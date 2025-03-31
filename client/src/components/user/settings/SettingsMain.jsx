@@ -54,8 +54,12 @@ const SettingsMain = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    // Удаляем пробелы из значения
-    setFormData({ ...formData, [id]: value.trim() });
+    if (id === "email" && value.includes(" ")) return;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]:
+        id === "email" ? value.replace(/\s/g, "") : value.replace(/\s/g, ""),
+    }));
   };
 
   const handleSubmitInfo = (e) => {
@@ -145,6 +149,19 @@ const SettingsMain = () => {
                         placeholder="<email>"
                         value={formData.email}
                         onChange={handleChange}
+                        onPaste={(e) => {
+                          e.preventDefault();
+                          const text = e.clipboardData
+                            .getData("text")
+                            .replace(/\s/g, "");
+                          setFormData((prevData) => ({
+                            ...prevData,
+                            email: text,
+                          }));
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === " ") e.preventDefault();
+                        }}
                       />
                     </div>
                     {infoErrors.email && <span>{infoErrors.email}</span>}
@@ -254,14 +271,14 @@ const SettingsMain = () => {
                 </form>
 
                 <div className={style.settings__form__buttons}>
-                    <button type="button" onClick={() => setOpenModal(true)}>
-                      <img src={removeAccount} alt="remove" /> Удалить аккаунт
-                    </button>
-                    <div className={style.settings__form__buttons__con}>
-                      <button>Отмена</button>
-                      <button onClick={handleSubmitSecurity}>Сохранить</button>
-                    </div>
+                  <button type="button" onClick={() => setOpenModal(true)}>
+                    <img src={removeAccount} alt="remove" /> Удалить аккаунт
+                  </button>
+                  <div className={style.settings__form__buttons__con}>
+                    <button>Отмена</button>
+                    <button onClick={handleSubmitSecurity}>Сохранить</button>
                   </div>
+                </div>
               </div>
             </div>
           </div>

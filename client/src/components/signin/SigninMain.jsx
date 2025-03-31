@@ -42,6 +42,16 @@ const Signin = () => {
     navigate("/user/main");
   };
 
+  const handleLoginChange = (event) => {
+    const value = event.target.value.replace(/\s/g, ""); // Удаляем пробелы
+    setLogin(value);
+  };
+
+  const handlePasswordChange = (event) => {
+    const value = event.target.value.replace(/\s/g, ""); // Удаляем пробелы
+    setPassword(value);
+  };
+
   return (
     <section className={style.signin}>
       <div className="container">
@@ -53,7 +63,7 @@ const Signin = () => {
               <input
                 type="text"
                 placeholder="Имя пользователя или электронная почта"
-                onChange={(event) => setLogin(event.target.value)}
+                onChange={handleLoginChange}
                 value={login}
                 style={
                   error
@@ -66,7 +76,7 @@ const Signin = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Пароль"
-                  onChange={(event) => setPassword(event.target.value)}
+                  onChange={handlePasswordChange}
                   value={password}
                   style={
                     error
