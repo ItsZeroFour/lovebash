@@ -5,7 +5,7 @@ import exit from "../../assets/icons/left_panel/exit.svg";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useLocation } from "react-router-dom";
 
-const MAX_LENGTH = 25; // Максимальная длина текста перед сокращением
+const MAX_LENGTH = 15; // Максимальная длина текста перед сокращением
 
 const truncateText = (text, length) => {
   return text.length > length ? text.substring(0, length) + "..." : text;
@@ -91,14 +91,17 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
     }
   };
 
-  const handleMouseLeaveModule = () => {
-    setTimeout(() => {
+  const handleMouseLeaveModule = (event) => {
+    if (
+      !event.relatedTarget ||
+      !event.relatedTarget.closest(`.${style.left_panel__modules__items}`)
+    ) {
       setHoveredModule(null);
-    }, 200);
+    }
   };
 
   const handleMouseEnterTasks = () => {
-    setHoveredModule((prev) => prev);
+    // Просто оставляем hoveredModule активным
   };
 
   return (
@@ -162,7 +165,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                               onMouseEnter={(e) =>
                                 handleMouseEnterModule(e, module._id)
                               }
-                              onMouseLeave={handleMouseLeaveModule}
+                              onMouseLeave={(e) => handleMouseLeaveModule(e)}
                             >
                               <Link
                                 to={`/user/modules/${module._id}`}
@@ -178,7 +181,9 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                                     left: taskPosition.left,
                                   }}
                                   onMouseEnter={handleMouseEnterTasks}
-                                  onMouseLeave={handleMouseLeaveModule}
+                                  onMouseLeave={(e) =>
+                                    handleMouseLeaveModule(e)
+                                  }
                                 >
                                   {modules
                                     .find((m) => m._id === hoveredModule)
@@ -267,10 +272,7 @@ const LeftPanel = ({ setOpenMenu, openMenu }) => {
                                 <ol>
                                   {item.tasks.map((task) => (
                                     <li key={task._id}>
-                                      <Link
-                                        to={`/user/task/${task._id}`}
-                                        onClick={() => setOpenMenu(false)}
-                                      >
+                                      <Link to={`/task/${task._id}`}>
                                         {task.title}
                                       </Link>
                                     </li>
