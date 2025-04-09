@@ -7,6 +7,13 @@ import arrowDown from "../../assets/icons/create_module/arrow-down.svg";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 
+const allTasks = [
+  { id: 1, name: "Задание 1" },
+  { id: 2, name: "Задание 2" },
+  { id: 3, name: "Задание 3" },
+  { id: 4, name: "Задание 4" },
+];
+
 const CreateModule = () => {
   const [description, setDescription] = useState("");
   const [theory, setTheory] = useState("");
@@ -18,6 +25,8 @@ const CreateModule = () => {
   const [status, setStatus] = useState("active");
   const [errors, setErrors] = useState({});
 
+  console.log(selectedTasks);
+
   const navigate = useNavigate();
 
   /* 🤩 Тут мы получаем id модуля. От этого можно понимать, создаем ли мы новый модуль или редактируем уже существующий */
@@ -26,12 +35,12 @@ const CreateModule = () => {
   console.log(state);
 
   const handleTaskChange = (event) => {
-    const value = event.target.value;
-    setSelectedTasks((prev) =>
-      prev.includes(value)
-        ? prev.filter((task) => task !== value)
-        : [...prev, value]
+    const selectedOptions = Array.from(event.target.selectedOptions);
+    const selectedIds = selectedOptions.map((option) => Number(option.value));
+    const selectedObjects = allTasks.filter((task) =>
+      selectedIds.includes(task.id)
     );
+    setSelectedTasks(selectedObjects);
   };
 
   const toggleSelect = () => {
@@ -185,13 +194,14 @@ const CreateModule = () => {
                     {isSelectOpen && (
                       <select
                         multiple
-                        value={selectedTasks}
+                        value={selectedTasks.map((task) => String(task.id))}
                         onChange={handleTaskChange}
                       >
-                        <option value="task1">Задание 1</option>
-                        <option value="task2">Задание 2</option>
-                        <option value="task3">Задание 3</option>
-                        <option value="task4">Задание 4</option>
+                        {allTasks.map((task) => (
+                          <option key={task.id} value={task.id}>
+                            {task.name}
+                          </option>
+                        ))}
                       </select>
                     )}
                   </div>
@@ -201,20 +211,20 @@ const CreateModule = () => {
 
                     <ol>
                       {selectedTasks.map((item, index) => (
-                        <li key={item}>
+                        <li key={item.id}>
                           <p>{index + 1}.</p>
 
                           <div
                             onClick={() =>
                               navigate(`/tasks/create`, {
-                                state: { id: item },
+                                state: { id: item.id },
                               })
                             }
                             className={
                               style.create_module__tasks__selected__item
                             }
                           >
-                            <p>{item}</p>
+                            <p>{item.name}</p>
                           </div>
 
                           <div
@@ -297,14 +307,14 @@ const CreateModule = () => {
 
                   <ol>
                     {selectedTasks.map((item, index) => (
-                      <li key={item}>
+                      <li key={item.id}>
                         <Link
                           to="/tasks/create"
                           /* Тут скорее всего надо будет отредактировать передачу id */
                           state={{ id: item.id || index }}
                         >
                           <p>
-                            {index + 1}. {item}
+                            {index + 1}. {item.name}
                           </p>
                           <p>Не пройдено</p>
                         </Link>
